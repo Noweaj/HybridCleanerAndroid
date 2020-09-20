@@ -1,4 +1,4 @@
-package com.noweaj.android.hybridcleanerandroid.splash
+package com.noweaj.android.hybridcleanerandroid.splash.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
