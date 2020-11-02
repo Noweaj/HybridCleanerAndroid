@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/main_viewpager_fragment">
+
+    <fragment
+        android:id="@+id/main_viewpager_fragment"
+        android:name="com.noweaj.android.hybridcleanerandroid.ui.MainViewPagerFragment"
+        tools:layout="@layout/fragment_main_viewpager"/>
+
+</navigation>
