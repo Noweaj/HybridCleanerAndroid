@@ -6,4 +6,7 @@
     <string name="tab_title_main_diagnosis">센서진단</string>
     <string name="tab_title_main_battery">배터리</string>
     <string name="tab_title_main_cs">고객센터</string>
+
+    <string name="button_title_diagnosis_ambient">조도 센서 진단</string>
+    <string name="button_title_diagnosis_cliff">절벽감지 센서 진단</string>
 </resources>

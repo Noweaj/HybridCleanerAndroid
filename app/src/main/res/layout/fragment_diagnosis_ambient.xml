@@ -21,13 +21,17 @@
                 android:id="@+id/b_diagnosis_ambient_active"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="@drawable/background_diagnosis_selected"
+                android:text="@string/button_title_diagnosis_ambient"/>
 
             <Button
                 android:id="@+id/b_diagnosis_cliff_inactive"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/background_diagnosis_deselected"
+                android:text="@string/button_title_diagnosis_cliff"
                 android:onClick="@{()->diagnosisAmbientViewModel.onModeChange()}"/>
 
         </LinearLayout>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/diagnosis_ambient_fragment"
-        android:name="com.noweaj.android.hybridcleanerandroid.ui.DiagnosisAmbientFragment"
+        android:name="com.noweaj.android.hybridcleanerandroid.ui.diagnosis.DiagnosisAmbientFragment"
         tools:layout="@layout/fragment_diagnosis_ambient">
 
         <action
@@ -18,11 +18,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
 
+        <argument
+            android:name="mode"
+            app:argType="string"/>
+
     </fragment>
 
     <fragment
         android:id="@+id/diagnosis_cliff_fragment"
-        android:name="com.noweaj.android.hybridcleanerandroid.ui.DiagnosisCliffFragment"
+        android:name="com.noweaj.android.hybridcleanerandroid.ui.diagnosis.DiagnosisCliffFragment"
         tools:layout="@layout/fragment_diagnosis_cliff">
 
         <action
@@ -32,6 +36,10 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+
+        <argument
+            android:name="mode"
+            app:argType="string"/>
 
     </fragment>
 

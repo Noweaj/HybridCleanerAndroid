@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.noweaj.android.hybridcleanerandroid.ui.BatteryFragment
 import com.noweaj.android.hybridcleanerandroid.ui.CsViewPagerFragment
-import com.noweaj.android.hybridcleanerandroid.ui.DiagnosisAmbientFragment
+import com.noweaj.android.hybridcleanerandroid.ui.diagnosis.DiagnosisAmbientFragment
 import com.noweaj.android.hybridcleanerandroid.ui.RemoteFragment
 
 const val REMOTE_PAGE_INDEX = 0
