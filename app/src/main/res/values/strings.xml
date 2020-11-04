@@ -2,19 +2,38 @@
     <string name="app_name">HybridCleanerAndroid</string>
     <string name="copyright">Copyright ©  Co., Ltd. All rights reserved.</string>
 
+    // main
     <string name="tab_title_main_remote">리모컨</string>
     <string name="tab_title_main_diagnosis">센서진단</string>
     <string name="tab_title_main_battery">배터리</string>
     <string name="tab_title_main_cs">고객센터</string>
 
+    // diagnosis
     <string name="button_title_diagnosis_ambient">조도 센서 진단</string>
     <string name="info_diagnosis_ambient">센스봇 윗면에 있는 조도센서를 손으로 가린 후\n떼는 동작을 해보세요.\n아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>
     <string name="button_title_diagnosis_cliff">절벽감지 센서 진단</string>
     <string name="info_diagnosis_cliff">센스봇 바닥에 있는 4개의 센서를 손으로 가린 후\n떼는 동작을 해보세요.\n아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>
 
+    // battery
+    <string name="title_battery_connected">Connected</string>
+    <string name="title_battery_disconnected">Disconnected</string>
+    <string name="title_battery_connecting">Connecting..</string>
+    <string name="info_battery_1">※ 배터리 전량은 기본적으로 물걸레 로봇청소기의 전원이 켜진 상태에서 블루투스 연결 후 확인할 수 있습니다.</string>
+    <string name="info_battery_2">※ 핸디청소기를 연결하기 위해서는 물걸레 로봇청소기에 장착하여야 합니다.</string>
+
+    // cs
     <string name="tab_title_cs_qna">자주하는 질문</string>
     <string name="tab_title_cs_inquiry">문의하기</string>
     <string name="tab_title_cs_response">문의내역확인</string>
     <string name="tab_title_cs_cscenter">고객센터</string>
+
+    // cs center
+    <string name="title_cs_center_fine">파인로보틱스 고객센터</string>
+    <string name="title_cs_center_phone">1577-1577</string>
+    <string name="title_cs_center_info">A/S센터 위치 및 운영시간 안내</string>
+    <string name="title_cs_center_title_address"> 주 소 </string>
+    <string name="title_cs_center_title_workinghours">운영시간</string>
+    <string name="title_cs_center_content_address">| 서울시 서울구 서울로 1호(서울동, 서울빌딩)</string>
+    <string name="title_cs_center_content_workinghours">| 월요일~금요일 AM10:00~PM18:00\n (점심시간 PM12:00~PM13:00, 주말,공휴일 휴무)</string>
 
 </resources>
