@@ -8,5 +8,13 @@
     <string name="tab_title_main_cs">고객센터</string>
 
     <string name="button_title_diagnosis_ambient">조도 센서 진단</string>
+    <string name="info_diagnosis_ambient">센스봇 윗면에 있는 조도센서를 손으로 가린 후\n떼는 동작을 해보세요.\n아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>
     <string name="button_title_diagnosis_cliff">절벽감지 센서 진단</string>
+    <string name="info_diagnosis_cliff">센스봇 바닥에 있는 4개의 센서를 손으로 가린 후\n떼는 동작을 해보세요.\n아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>
+
+    <string name="tab_title_cs_qna">자주하는 질문</string>
+    <string name="tab_title_cs_inquiry">문의하기</string>
+    <string name="tab_title_cs_response">문의내역확인</string>
+    <string name="tab_title_cs_cscenter">고객센터</string>
+
 </resources>

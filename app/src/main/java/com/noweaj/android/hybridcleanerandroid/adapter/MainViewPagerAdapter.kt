@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.noweaj.android.hybridcleanerandroid.ui.BatteryFragment
 import com.noweaj.android.hybridcleanerandroid.ui.CsViewPagerFragment
+import com.noweaj.android.hybridcleanerandroid.ui.DiagnosisFragment
 import com.noweaj.android.hybridcleanerandroid.ui.diagnosis.DiagnosisAmbientFragment
 import com.noweaj.android.hybridcleanerandroid.ui.RemoteFragment
 
@@ -16,7 +17,7 @@ class MainViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
 
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
         REMOTE_PAGE_INDEX to { RemoteFragment() },
-        DIAGNOSIS_PAGE_INDEX to { DiagnosisAmbientFragment() },
+        DIAGNOSIS_PAGE_INDEX to { DiagnosisFragment() },
         BATTERY_PAGE_INDEX to { BatteryFragment() },
         CS_PAGE_INDEX to { CsViewPagerFragment() }
     )

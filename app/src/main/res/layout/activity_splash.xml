@@ -16,7 +16,7 @@
         app:layout_constraintHeight_percent=".1"
         app:layout_constraintWidth_percent=".1"
         app:layout_constraintVertical_bias=".45"
-        android:src="@drawable/splash_finelogo"/>
+        android:src="@drawable/image_splash_finelogo"/>
 
     <TextView
         android:layout_width="match_parent"

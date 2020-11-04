@@ -2,7 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_cs">
+    android:id="@+id/nav_cs"
+    app:startDestination="@id/cs_viewpager_fragment">
 
     <fragment
         android:id="@+id/cs_viewpager_fragment"

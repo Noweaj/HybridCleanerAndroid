@@ -1,2 +1,3 @@
+include ':sensebotbatterylibrary-release'
 include ':app'
 rootProject.name = "HybridCleanerAndroid"

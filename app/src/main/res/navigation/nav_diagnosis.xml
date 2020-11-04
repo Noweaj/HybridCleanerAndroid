@@ -12,15 +12,7 @@
 
         <action
             android:id="@+id/action_ambient_fragment_to_cliff_fragment"
-            app:destination="@id/diagnosis_cliff_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-
-        <argument
-            android:name="mode"
-            app:argType="string"/>
+            app:destination="@id/diagnosis_cliff_fragment"/>
 
     </fragment>
 
@@ -29,17 +21,10 @@
         android:name="com.noweaj.android.hybridcleanerandroid.ui.diagnosis.DiagnosisCliffFragment"
         tools:layout="@layout/fragment_diagnosis_cliff">
 
-        <action
-            android:id="@+id/action_cliff_fragment_to_ambient_fragment"
-            app:destination="@id/diagnosis_ambient_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-
         <argument
-            android:name="mode"
-            app:argType="string"/>
+            android:name="itemid"
+            app:argType="long"
+            android:defaultValue="-1L" />
 
     </fragment>
 

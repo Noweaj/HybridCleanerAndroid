@@ -20,6 +20,9 @@ class DiagnosisAmbientFragment: Fragment() {
     ): View? {
         val binding = FragmentDiagnosisAmbientBinding.inflate(inflater, container, false)
         binding.diagnosisAmbientViewModel = DiagnosisAmbientViewModel()
+        binding.bDiagnosisCliffInactive.setOnClickListener{
+            findNavController().navigate(DiagnosisAmbientFragmentDirections.actionAmbientFragmentToCliffFragment())
+        }
         return binding.root
     }
 }
