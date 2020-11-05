@@ -6,75 +6,149 @@
         android:layout_height="match_parent"
         android:background="#ededed">
 
-        <LinearLayout
-            android:id="@+id/ll_battery_batterymeter"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent=".55"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="20dp"
-            android:orientation="horizontal">
+            app:layout_constraintBottom_toTopOf="@id/rl_battery_bottom">
 
-            <com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
-                android:id="@+id/ssbm_handheld"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:battery_meter_title_text="핸디청소기"
-                app:battery_meter_title_text_size="12sp"
-                app:battery_meter_progress="50"
-                android:layout_margin="10dp"
-                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
-                android:id="@+id/ssbm_base"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:battery_meter_title_text="물걸레 로봇청소기"
-                app:battery_meter_title_text_size="12sp"
-                app:battery_meter_progress="50"
-                android:layout_margin="10dp"
-                />
+                <LinearLayout
+                    android:id="@+id/ll_battery_batterymeter"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight_percent=".60"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-            <com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
-                android:id="@+id/ssbm_robot"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:battery_meter_title_text="3 in 1 센스봇"
-                app:battery_meter_title_text_size="12sp"
-                app:battery_meter_progress="50"
-                android:layout_margin="10dp"
-                />
+                    <com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
+                        android:id="@+id/ssbm_handheld"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:battery_meter_title_text="핸디청소기"
+                        app:battery_meter_title_text_size="12sp"
+                        app:battery_meter_progress="50"
+                        android:layout_margin="10dp"
+                        />
 
-        </LinearLayout>
+                    <com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
+                        android:id="@+id/ssbm_base"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:battery_meter_title_text="물걸레 로봇청소기"
+                        app:battery_meter_title_text_size="12sp"
+                        app:battery_meter_progress="50"
+                        android:layout_margin="10dp"
+                        />
 
-        <LinearLayout
-            android:id="@+id/ll_battery_btindicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ll_battery_batterymeter"
-            android:layout_margin="20dp"
-            android:orientation="horizontal">
+                    <com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
+                        android:id="@+id/ssbm_robot"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:battery_meter_title_text="3 in 1 센스봇"
+                        app:battery_meter_title_text_size="12sp"
+                        app:battery_meter_progress="50"
+                        android:layout_margin="10dp"
+                        />
 
-        </LinearLayout>
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_battery_info"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_battery_btindicator"
-            android:layout_margin="20dp"
-            android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/ll_battery_btindicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/ll_battery_batterymeter"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:text="@string/text_battery_connecting"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/background_battery_connecting"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:text="@string/text_battery_disconnected"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/background_battery_disconnected"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:text="@string/text_battery_connected"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/background_battery_connected"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_battery_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toBottomOf="@id/ll_battery_btindicator"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_margin="15dp"
+                    android:padding="15dp"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_battery_info_1"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_battery_info_2"
+                        android:layout_marginTop="10dp"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
         <RelativeLayout
+            android:id="@+id/rl_battery_bottom"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_battery_info"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="#363636"
+            android:padding="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_battery_warning"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"/>
 
         </RelativeLayout>
 

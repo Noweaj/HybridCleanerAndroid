@@ -23,7 +23,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_cs_center_operator"
-            android:text="@string/title_cs_center_fine"
+            android:text="@string/text_cs_center_fine"
             android:textSize="15sp"/>
 
         <TextView
@@ -33,7 +33,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_cs_center_fine"
-            android:text="@string/title_cs_center_phone"
+            android:text="@string/text_cs_center_phone"
             android:textStyle="bold"
             style="@style/TextAppearance.MaterialComponents.Headline5"/>
 
@@ -61,7 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_cs_center_info"
+                android:text="@string/text_cs_center_info"
                 android:textStyle="bold"/>
 
             <LinearLayout
@@ -79,13 +79,13 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/title_cs_center_title_address"
+                        android:text="@string/text_cs_center_title_address"
                         android:gravity="center_horizontal"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/title_cs_center_title_workinghours"
+                        android:text="@string/text_cs_center_title_workinghours"
                         android:gravity="center_horizontal"/>
 
                 </LinearLayout>
@@ -99,12 +99,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/title_cs_center_content_address"/>
+                        android:text="@string/text_cs_center_content_address"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/title_cs_center_content_workinghours"/>
+                        android:text="@string/text_cs_center_content_workinghours"/>
 
                 </LinearLayout>
 

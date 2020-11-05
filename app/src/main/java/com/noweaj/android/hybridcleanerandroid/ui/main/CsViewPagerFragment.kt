@@ -1,4 +1,4 @@
-package com.noweaj.android.hybridcleanerandroid.ui
+package com.noweaj.android.hybridcleanerandroid.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,10 +32,10 @@ class CsViewPagerFragment: Fragment() {
 
     private fun getTabTitle(pos: Int): String? {
         return when(pos){
-            QNA_PAGE_INDEX -> getString(R.string.tab_title_cs_qna)
-            INQUIRY_PAGE_INDEX -> getString(R.string.tab_title_cs_inquiry)
-            RESPONSE_PAGE_INDEX -> getString(R.string.tab_title_cs_response)
-            CSCENTER_PAGE_INDEX -> getString(R.string.tab_title_cs_cscenter)
+            QNA_PAGE_INDEX -> getString(R.string.title_tab_cs_qna)
+            INQUIRY_PAGE_INDEX -> getString(R.string.title_tab_cs_inquiry)
+            RESPONSE_PAGE_INDEX -> getString(R.string.title_tab_cs_response)
+            CSCENTER_PAGE_INDEX -> getString(R.string.title_tab_cs_cscenter)
             else -> null
         }
     }

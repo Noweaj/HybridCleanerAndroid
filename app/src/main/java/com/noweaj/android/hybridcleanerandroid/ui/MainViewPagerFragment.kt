@@ -53,10 +53,10 @@ class MainViewPagerFragment: Fragment() {
 
     private fun getTabTitle(pos: Int): String? {
         return when(pos){
-            REMOTE_PAGE_INDEX -> getString(R.string.tab_title_main_remote)
-            DIAGNOSIS_PAGE_INDEX -> getString(R.string.tab_title_main_diagnosis)
-            BATTERY_PAGE_INDEX -> getString(R.string.tab_title_main_battery)
-            CS_PAGE_INDEX -> getString(R.string.tab_title_main_cs)
+            REMOTE_PAGE_INDEX -> getString(R.string.title_tab_main_remote)
+            DIAGNOSIS_PAGE_INDEX -> getString(R.string.title_tab_main_diagnosis)
+            BATTERY_PAGE_INDEX -> getString(R.string.title_tab_main_battery)
+            CS_PAGE_INDEX -> getString(R.string.title_tab_main_cs)
             else -> null
         }
     }

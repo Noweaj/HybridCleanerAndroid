@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.databinding.FragmentDiagnosisAmbientBinding
+
 import com.noweaj.android.hybridcleanerandroid.viewmodel.DiagnosisAmbientViewModel
 
 class DiagnosisAmbientFragment: Fragment() {

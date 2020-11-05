@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cs_viewpager_fragment"
-        android:name="com.noweaj.android.hybridcleanerandroid.ui.CsViewPagerFragment"
+        android:name="com.noweaj.android.hybridcleanerandroid.ui.main.CsViewPagerFragment"
         tools:layout="@layout/fragment_cs_viewpager"/>
 
     <fragment

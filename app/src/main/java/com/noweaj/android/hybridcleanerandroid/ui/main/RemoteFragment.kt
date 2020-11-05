@@ -1,4 +1,4 @@
-package com.noweaj.android.hybridcleanerandroid.ui
+package com.noweaj.android.hybridcleanerandroid.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
