@@ -8,6 +8,11 @@
     <string name="title_tab_main_battery">배터리</string>
     <string name="title_tab_main_cs">고객센터</string>
 
+    // dialog
+    <string name="text_dialog_ble_title">센스봇 연결</string>
+    <string name="text_dialog_ble_info">센스봇과 연결 없이 앱을 사용할 수 있으나\n일부 기능이 제한됩니다.</string>
+    <string name="button_dialog_ble_skip">연결하지 않고 사용</string>
+
     // diagnosis
     <string name="button_diagnosis_ambient">조도 센서 진단</string>
     <string name="text_diagnosis_ambient_info">센스봇 윗면에 있는 조도센서를 손으로 가린 후\n떼는 동작을 해보세요.\n아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>

@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
-import android.widget.ListAdapter
 import androidx.fragment.app.Fragment
-import com.google.gson.Gson
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.adapter.CsQnaListAdapter
 import com.noweaj.android.hybridcleanerandroid.data.CsQnaData

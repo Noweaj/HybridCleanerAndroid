@@ -18,7 +18,7 @@ class DiagnosisAmbientFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentDiagnosisAmbientBinding.inflate(inflater, container, false)
-        binding.diagnosisAmbientViewModel = DiagnosisAmbientViewModel()
+        binding.diagnosisAmbientViewModel = DiagnosisAmbientViewModel(requireActivity().application)
         binding.bDiagnosisCliffInactive.setOnClickListener{
             findNavController().navigate(DiagnosisAmbientFragmentDirections.actionAmbientFragmentToCliffFragment())
         }
