@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        
 //        BleDialog(this).show()
     }
 }

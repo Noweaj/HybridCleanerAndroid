@@ -19,7 +19,7 @@ class CscenterFragment: Fragment() {
         val binding = FragmentCsCenterBinding.inflate(inflater, container, false)
         binding.ibCsCenterCall.setOnClickListener{
             val callIntent = Intent(Intent.ACTION_DIAL)
-            callIntent.setData(Uri.parse("tel:15771577"))
+            callIntent.data = Uri.parse("tel:15771577")
             startActivity(callIntent)
         }
         return binding.root
