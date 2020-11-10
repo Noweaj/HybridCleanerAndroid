@@ -9,7 +9,8 @@
             android:id="@+id/tl_cs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#ededed"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp2_cs"

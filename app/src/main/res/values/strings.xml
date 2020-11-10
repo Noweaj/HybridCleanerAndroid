@@ -1,5 +1,7 @@
 <resources>
+    // app
     <string name="app_name">HybridCleanerAndroid</string>
+    <string name="preference_ble">HybridCleanerAndroidBle</string>
     <string name="text_splash_copyright">Copyright ©  Co., Ltd. All rights reserved.</string>
 
     // main

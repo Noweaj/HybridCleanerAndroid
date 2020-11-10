@@ -35,7 +35,7 @@ class MainViewPagerFragment: Fragment() {
             tab.text = getTabTitle(pos)
         }.attach()
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.tbMain)
+//        (activity as AppCompatActivity).setSupportActionBar(binding.tbMain)
 //        (activity as AppCompatActivity).supportActionBar!!.setIcon(R.drawable.ic_baseline_menu_48_000000)
 
         return binding.root

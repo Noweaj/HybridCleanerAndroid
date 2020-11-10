@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.HybridCleaner" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Base.Theme.HybridCleaner" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,7 +9,7 @@
 
     <style name="Theme.HybridCleaner" parent="Base.Theme.HybridCleaner"/>
 
-    <style name="Theme.HybridCleaner.NoActionBar">
+    <style name="Theme.HybridCleaner.NoActionBar" parent="Base.Theme.HybridCleaner">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
