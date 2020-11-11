@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#ededed">
+    android:background="#fafafa">
 
     <TextView
         android:id="@+id/tv_cs_qna_title"

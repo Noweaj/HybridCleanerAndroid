@@ -10,10 +10,18 @@
     <string name="title_tab_main_battery">배터리</string>
     <string name="title_tab_main_cs">고객센터</string>
 
-    // dialog
+    // ble dialog
     <string name="text_dialog_ble_title">센스봇 연결</string>
     <string name="text_dialog_ble_info">센스봇과 연결 없이 앱을 사용할 수 있으나\n일부 기능이 제한됩니다.</string>
     <string name="button_dialog_ble_skip">연결하지 않고 사용</string>
+
+    // err dialog
+    <string name="text_dialog_err_title">오류발생</string>
+    <string name="text_dialog_err_ble_notsupported">이 기기는 Bluetooth LE를 지원하지 않습니다.\n다른 기기를 이용해 주세요.</string>
+    <string name="text_dialog_err_bluetooth_notsupported">이 기기는 Bluetooth를 지원하지 않습니다.\n다른 기기를 이용해 주세요.</string>
+    <string name="text_dialog_err_bluetooth_notenabled">Bluetooth가 활성화 되지 않았습니다.\n다시 시도해 주세요.</string>
+    <string name="text_dialog_err_permission_notgranted">앱을 사용하는 데 필수적인 권한을 획득하지 못했습니다. 다시 시도해 주세요.</string>
+    <string name="button_dialog_err_exit">앱 종료</string>
 
     // diagnosis
     <string name="button_diagnosis_ambient">조도 센서 진단</string>

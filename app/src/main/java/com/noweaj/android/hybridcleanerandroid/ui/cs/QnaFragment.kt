@@ -21,7 +21,12 @@ class QnaFragment: Fragment() {
         val binding = FragmentCsQnaBinding.inflate(inflater, container, false)
 
         val dataSet = loadQnaData()
-        val adapter = CsQnaListAdapter(dataSet = dataSet, titleLayout = R.layout.elv_cs_qna_title, contentLayout = R.layout.elv_cs_qna_content, context = requireContext())
+        val adapter = CsQnaListAdapter(
+            dataSet = dataSet,
+            titleLayout = R.layout.elv_cs_qna_title,
+            contentLayout = R.layout.elv_cs_qna_content,
+            context = requireContext()
+        )
         val expandableListView = binding.elvQna
         expandableListView.setAdapter(adapter)
 
