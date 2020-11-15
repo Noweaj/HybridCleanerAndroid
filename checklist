@@ -8,7 +8,7 @@ V QnA-CS UI
 V Center-CS UI
 - Drawer UI
 - Firebase setup
-- Bluetooth UI
+V Bluetooth UI
 - Bluetooth connection
 - Bluetooth data RxJava (hot observable)
 - Diagnosis BT

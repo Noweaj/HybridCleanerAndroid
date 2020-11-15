@@ -6,7 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import com.noweaj.android.hybridcleanerandroid.R
 import kotlinx.android.synthetic.main.dialog_err.view.*
 
-class ErrorDialog(context: Context, private val dialogCallback: ErrorDialogCallback) {
+class ErrorDialog(context: Context, private val onRetryCallback: ErrorDialogCallback, private val onExitCallback: ErrorDialogCallback) {
 
     interface ErrorDialogCallback {
         fun onDialogFinished()
@@ -28,8 +28,13 @@ class ErrorDialog(context: Context, private val dialogCallback: ErrorDialogCallb
         view.tv_dialog_err_cause.text = "원인: $cause"
         view.tv_dialog_err_info.text = msg
 
-        view.ll_dialog_err_button.setOnClickListener{
-            dialogCallback.onDialogFinished()
+        view.ll_dialog_err_retry.setOnClickListener{
+            onRetryCallback.onDialogFinished()
+            dismiss()
+        }
+
+        view.ll_dialog_err_exit.setOnClickListener{
+            onExitCallback.onDialogFinished()
             dismiss()
         }
 
@@ -40,6 +45,4 @@ class ErrorDialog(context: Context, private val dialogCallback: ErrorDialogCallb
     fun dismiss(){
         dialog?.dismiss()
     }
-
-
 }

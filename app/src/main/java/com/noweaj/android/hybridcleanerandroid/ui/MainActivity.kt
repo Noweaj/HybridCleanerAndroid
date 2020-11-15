@@ -12,9 +12,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.databinding.ActivityMainBinding
 import com.noweaj.android.hybridcleanerandroid.ui.component.BleDialog
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseActivity
 import com.noweaj.android.hybridcleanerandroid.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
 
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initUi()
+    }
+
+    override fun onBluetoothReady() {
         observe()
     }
 
@@ -72,10 +76,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        Log.d(TAG, "onResume")
     }
 
     override fun onPause() {
         super.onPause()
         dialog?.let{dialog!!.dismiss()}
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        binding.mainViewModel!!.bleStatus.removeObservers(this)
+        binding.mainViewModel!!.navigateToURL.removeObservers(this)
+        binding.mainViewModel!!.snackbar.removeObservers(this)
     }
 }
