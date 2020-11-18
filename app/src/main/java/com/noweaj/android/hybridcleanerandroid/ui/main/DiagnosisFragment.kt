@@ -9,6 +9,8 @@ import com.noweaj.android.hybridcleanerandroid.databinding.FragmentDiagnosisBind
 
 class DiagnosisFragment: Fragment() {
 
+    private val TAG = DiagnosisFragment::class.java.simpleName
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -18,4 +20,10 @@ class DiagnosisFragment: Fragment() {
 
         return binding.root
     }
+
+//    override fun onDataReceived(data: String) {
+//        Log.d(TAG, "data received: $data")
+//        val dataObject = JSONObject(data)
+//        Log.d(TAG, "index: ${dataObject.getInt("index")} / id: ${dataObject.getJSONArray("devices").getJSONObject(0).getString("id")}")
+//    }
 }

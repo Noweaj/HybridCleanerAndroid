@@ -44,7 +44,6 @@ class BleDialog(val context: Context, private val dialogCallback: BleDialogCallb
     var mScanning = false
 
     fun show(): AlertDialog{
-        Log.d(TAG, "show")
         dialog = builder.create()
 
         mHandler = Handler()

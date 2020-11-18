@@ -1,4 +1,5 @@
 <resources>
+
     // app
     <string name="app_name">HybridCleanerAndroid</string>
     <string name="preference_ble">HybridCleanerAndroidBle</string>
@@ -9,6 +10,8 @@
     <string name="title_tab_main_diagnosis">센서진단</string>
     <string name="title_tab_main_battery">배터리</string>
     <string name="title_tab_main_cs">고객센터</string>
+    <string name="text_snackbar_invaliddevice">연결에 실패하였습니다 - 잘못된 기기 연결 시도</string>
+    <string name="text_snackbar_bluetoothnotavailable">해당 기기는 블루투스 연결이 불가능 합니다.</string>
 
     // ble dialog
     <string name="text_dialog_ble_title">센스봇 연결</string>
@@ -21,6 +24,7 @@
     <string name="text_dialog_err_bluetooth_notsupported">이 기기는 Bluetooth를 지원하지 않습니다.\n다른 기기를 이용해 주세요.</string>
     <string name="text_dialog_err_bluetooth_notenabled">Bluetooth가 활성화 되지 않았습니다.\n해당 기능을 켜고 다시 시도해 주세요.</string>
     <string name="text_dialog_err_permission_notgranted">앱을 사용하는 데 필수적인 권한을 획득하지 못했습니다. 다시 시도해 주세요.</string>
+    <string name="button_dialog_err_nobluetooth">무시</string>
     <string name="button_dialog_err_retry">재시도</string>
     <string name="button_dialog_err_exit">앱 종료</string>
 

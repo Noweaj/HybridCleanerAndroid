@@ -63,6 +63,25 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/ll_dialog_err_nobluetooth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/colorPrimaryDark">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_dialog_err_nobluetooth"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:padding="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ll_dialog_err_retry"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -102,7 +121,6 @@
 
         </LinearLayout>
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

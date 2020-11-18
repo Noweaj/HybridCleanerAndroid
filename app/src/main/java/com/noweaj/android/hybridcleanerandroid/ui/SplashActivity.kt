@@ -34,7 +34,7 @@ class SplashActivity: BaseActivity() {
 //        Handler().postDelayed(r, 2000L)
     }
 
-    override fun onBluetoothReady() {
+    override fun onBluetoothCheckDone(isBluetoothAvailable: Boolean) {
         val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
         finish()

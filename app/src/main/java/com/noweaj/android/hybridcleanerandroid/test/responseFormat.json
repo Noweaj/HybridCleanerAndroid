@@ -1,0 +1,31 @@
+{
+  "index": 0,
+  "devices": [
+    {
+      "id": "HM7500",
+      "BattVolt": 1099,
+      "ChgCurr": 12,
+      "BattTemp": 24.7,
+      "BattPerc": 42,
+      "MotCurr": 114,
+      "BotSen": "265,357,2230,1990",
+      "AmSen": 2806,
+      "Dock": 1,
+      "ErrCode": 0
+    },
+    {
+      "id": "HV7500",
+      "BattVolt": 1572,
+      "ChgCurr": 18,
+      "BattTemp": 25.6,
+      "BattPerc": 85,
+      "MotCurr": 890,
+      "MatWatt": 13,
+      "Mode": 2,
+      "Ctrl": 0,
+      "ErrCode": 0,
+      "BattChgCycle": 0,
+      "OpTime": 90
+    }
+  ]
+}

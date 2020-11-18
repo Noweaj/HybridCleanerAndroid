@@ -6,7 +6,12 @@ import androidx.appcompat.app.AlertDialog
 import com.noweaj.android.hybridcleanerandroid.R
 import kotlinx.android.synthetic.main.dialog_err.view.*
 
-class ErrorDialog(context: Context, private val onRetryCallback: ErrorDialogCallback, private val onExitCallback: ErrorDialogCallback) {
+class ErrorDialog(
+    context: Context,
+    private val onNoBluetoothCallback: ErrorDialogCallback,
+    private val onRetryCallback: ErrorDialogCallback,
+    private val onExitCallback: ErrorDialogCallback
+) {
 
     interface ErrorDialogCallback {
         fun onDialogFinished()
@@ -22,11 +27,16 @@ class ErrorDialog(context: Context, private val onRetryCallback: ErrorDialogCall
 
     private var dialog: AlertDialog? = null
 
-    fun show(cause: String, msg: String){
+    fun show(cause: String, msg: String): AlertDialog {
         dialog = builder.create()
 
         view.tv_dialog_err_cause.text = "원인: $cause"
         view.tv_dialog_err_info.text = msg
+
+        view.ll_dialog_err_nobluetooth.setOnClickListener{
+            onNoBluetoothCallback.onDialogFinished()
+            dismiss()
+        }
 
         view.ll_dialog_err_retry.setOnClickListener{
             onRetryCallback.onDialogFinished()
@@ -40,6 +50,7 @@ class ErrorDialog(context: Context, private val onRetryCallback: ErrorDialogCall
 
         dialog?.setCanceledOnTouchOutside(false)
         dialog?.show()
+        return dialog as AlertDialog
     }
 
     fun dismiss(){

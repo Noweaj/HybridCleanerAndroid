@@ -69,6 +69,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_battery_btconnection_handheld"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -80,6 +81,7 @@
                         android:background="@drawable/background_battery_connecting"/>
 
                     <TextView
+                        android:id="@+id/tv_battery_btconnection_base"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -91,6 +93,7 @@
                         android:background="@drawable/background_battery_disconnected"/>
 
                     <TextView
+                        android:id="@+id/tv_battery_btconnection_robot"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

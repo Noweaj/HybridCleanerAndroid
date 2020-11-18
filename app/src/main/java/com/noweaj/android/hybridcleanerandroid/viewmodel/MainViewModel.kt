@@ -59,7 +59,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                 setBleStatus(1)
                 return
             } else {
-                _snackbar.value = SingleEvent("연결에 실패하였습니다 - 잘못된 기기 연결 시도")
+                _snackbar.value = SingleEvent(
+                    getApplication<Application>().getString(R.string.text_snackbar_invaliddevice)
+                )
             }
         }
         setBleStatus(-1)

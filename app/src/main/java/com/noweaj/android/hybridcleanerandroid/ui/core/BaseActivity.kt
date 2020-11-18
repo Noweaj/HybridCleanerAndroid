@@ -8,7 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.ui.component.ErrorDialog
@@ -20,11 +20,7 @@ abstract class BaseActivity: AppCompatActivity() {
     private val REQUEST_CODE_BLE = 1
     private val REQUEST_CODE_PERMISSION = 2
 
-    abstract fun onBluetoothReady()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    abstract fun onBluetoothCheckDone(isBluetoothAvailable: Boolean)
 
     override fun onStart() {
         super.onStart()
@@ -65,25 +61,38 @@ abstract class BaseActivity: AppCompatActivity() {
             }
         }
 
-        onBluetoothReady()
+        onBluetoothCheckDone(true)
     }
+
+    private var dialog: AlertDialog? = null
 
     private fun showAlertDialog(cause: String, msg: String){
         // show alert dialog
-        ErrorDialog(this,
-            object : ErrorDialog.ErrorDialogCallback {
+        dialog = ErrorDialog(
+            context = this,
+            onNoBluetoothCallback = object : ErrorDialog.ErrorDialogCallback{
+                override fun onDialogFinished() {
+                    onBluetoothCheckDone(false)
+                }
+            },
+            onRetryCallback = object : ErrorDialog.ErrorDialogCallback {
                 override fun onDialogFinished() {
                     checkBluetooth()
                 }
             },
-            object : ErrorDialog.ErrorDialogCallback {
+            onExitCallback = object : ErrorDialog.ErrorDialogCallback {
                 override fun onDialogFinished() {
                     finish()
                 }
-            }).show(cause, msg)
+            }
+        ).show(cause, msg)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
             REQUEST_CODE_BLE -> {
@@ -123,5 +132,10 @@ abstract class BaseActivity: AppCompatActivity() {
             }
         }
         checkBluetooth()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        dialog?.let { dialog!!.dismiss() }
     }
 }

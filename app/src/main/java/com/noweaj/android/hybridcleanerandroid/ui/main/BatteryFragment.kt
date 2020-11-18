@@ -1,21 +1,36 @@
 package com.noweaj.android.hybridcleanerandroid.ui.main
 
 import android.animation.ObjectAnimator
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.databinding.FragmentBatteryBinding
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragment
+import com.noweaj.android.hybridcleanerandroid.util.InjectionUtil
+import com.noweaj.android.hybridcleanerandroid.viewmodel.BatteryViewModel
 
-class BatteryFragment: Fragment() {
+class BatteryFragment: BaseFragment() {
 
-    lateinit var binding: FragmentBatteryBinding
-    lateinit var animatorHandheld: ObjectAnimator
-    lateinit var animatorBase: ObjectAnimator
-    lateinit var animatorRobot: ObjectAnimator
+    private val viewModel: BatteryViewModel by viewModels {
+        InjectionUtil.provideBatteryViewModelFactory()
+    }
+
+    private lateinit var binding: FragmentBatteryBinding
+    private lateinit var observerHandheld: Observer<Float>
+    private lateinit var observerBase: Observer<Float>
+    private lateinit var observerRobot: Observer<Float>
+    private var animatorHandheld: ObjectAnimator? = null
+    private var animatorBase: ObjectAnimator? = null
+    private var animatorRobot: ObjectAnimator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,36 +38,100 @@ class BatteryFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBatteryBinding.inflate(inflater, container, false)
-        setupUi()
+        setUpUi()
         return binding.root
     }
 
-    private fun setupUi(){
+    private fun setUpUi(){
         binding.ssbmHandheld.productImage = R.drawable.image_battery_handheld
-        animatorHandheld = ObjectAnimator.ofFloat(binding.ssbmHandheld, "progress", 0.toFloat(), 20.toFloat())
-        animatorHandheld.interpolator = DecelerateInterpolator()
-        animatorHandheld.duration = 1500
-
+        binding.ssbmHandheld.progress = 0.toFloat()
         binding.ssbmBase.productImage = R.drawable.image_battery_base
-        animatorBase = ObjectAnimator.ofFloat(binding.ssbmBase, "progress", 0.toFloat(), 50.toFloat())
-        animatorBase.interpolator = DecelerateInterpolator()
-        animatorBase.duration = 1500
-
+        binding.ssbmBase.progress = 0.toFloat()
         binding.ssbmRobot.productImage = R.drawable.image_battery_robot
-        animatorRobot = ObjectAnimator.ofFloat(binding.ssbmRobot, "progress", 0.toFloat(), 80.toFloat())
-        animatorRobot.interpolator = DecelerateInterpolator()
-        animatorRobot.duration = 1500
+        binding.ssbmRobot.progress = 0.toFloat()
+        setConnectionStatus(
+            binding.tvBatteryBtconnectionHandheld,
+            R.string.text_battery_disconnected,
+            R.drawable.background_battery_disconnected
+        )
+        setConnectionStatus(
+            binding.tvBatteryBtconnectionBase,
+            R.string.text_battery_disconnected,
+            R.drawable.background_battery_disconnected
+        )
+        setConnectionStatus(
+            binding.tvBatteryBtconnectionRobot,
+            R.string.text_battery_disconnected,
+            R.drawable.background_battery_disconnected
+        )
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        runAnimation()
+    private fun setConnectionStatus(textView: TextView, msg: Int, background: Int){
+        textView.setText(msg)
+        textView.setBackgroundResource(background)
     }
 
-    private fun runAnimation(){
-        animatorHandheld.start()
-        animatorBase.start()
-        animatorRobot.start()
+    override fun addObservers() {
+        observerHandheld = Observer{
+            animatorHandheld = setAnimation(
+                binding.ssbmHandheld,
+                binding.ssbmHandheld.progress,
+                it
+            )
+            animatorHandheld!!.start()
+            setConnectionStatus(
+                binding.tvBatteryBtconnectionHandheld,
+                R.string.text_battery_connected,
+                R.drawable.background_battery_connected
+            )
+        }
+        viewModel.batteryHandheld.observe(viewLifecycleOwner, observerHandheld)
+
+        observerBase = Observer {
+            animatorBase = setAnimation(
+                binding.ssbmBase,
+                binding.ssbmBase.progress,
+                it
+            )
+            animatorBase!!.start()
+            setConnectionStatus(
+                binding.tvBatteryBtconnectionBase,
+                R.string.text_battery_connected,
+                R.drawable.background_battery_connected
+            )
+        }
+        viewModel.batteryBase.observe(viewLifecycleOwner, observerBase)
+
+        observerRobot = Observer {
+            animatorRobot = setAnimation(
+                binding.ssbmRobot,
+                binding.ssbmRobot.progress,
+                it
+            )
+            animatorRobot!!.start()
+            setConnectionStatus(
+                binding.tvBatteryBtconnectionRobot,
+                R.string.text_battery_connected,
+                R.drawable.background_battery_connected
+            )
+        }
+        viewModel.batteryRobot.observe(viewLifecycleOwner, observerRobot)
+    }
+
+    private fun setAnimation(meter: SenseBotBatteryMeter, before: Float, after: Float): ObjectAnimator {
+        val objectAnimator = ObjectAnimator.ofFloat(meter, "progress", before, after)
+        objectAnimator.interpolator = DecelerateInterpolator()
+        objectAnimator.duration = 1500
+        return objectAnimator
+    }
+
+    override fun removeObservers() {
+        viewModel.batteryHandheld.removeObserver(observerHandheld)
+        viewModel.batteryBase.removeObserver(observerBase)
+        viewModel.batteryRobot.removeObserver(observerRobot)
+    }
+
+    override fun onDataReceived(data: String) {
+        viewModel.processData(data)
     }
 }
