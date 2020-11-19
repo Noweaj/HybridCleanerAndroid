@@ -21,6 +21,18 @@
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
+            <TextView
+                android:id="@+id/tv_main_notification_nobluetooth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="10sp"
+                android:text="블루투스 연결 없음"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:background="#FF6666"
+                android:visibility="gone"/>
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tb_main"
                 android:layout_width="match_parent"
@@ -46,9 +58,10 @@
 
                     <ImageView
                         android:id="@+id/iv_main_fine"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:src="@drawable/image_main_logo"
+                        app:layout_constraintWidth_percent=".60"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -88,7 +101,5 @@
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </layout>

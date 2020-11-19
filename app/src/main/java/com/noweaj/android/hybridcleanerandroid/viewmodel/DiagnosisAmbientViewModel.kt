@@ -5,9 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseViewModel
 import org.json.JSONObject
 
-class DiagnosisAmbientViewModel {
+class DiagnosisAmbientViewModel: BaseViewModel() {
 
     private val TAG = DiagnosisAmbientViewModel::class.java.simpleName
 
@@ -15,8 +16,12 @@ class DiagnosisAmbientViewModel {
     val isAmbientDark: LiveData<Boolean>
         get() = _isAmbientDark
 
-    fun processData(data: String){
+    override fun onConnected(data: String) {
         val dataObject = JSONObject(data).getJSONArray("devices").getJSONObject(0)
         _isAmbientDark.postValue(dataObject.getInt("AmSen") > 3000)
+    }
+
+    override fun onDisconnected() {
+
     }
 }

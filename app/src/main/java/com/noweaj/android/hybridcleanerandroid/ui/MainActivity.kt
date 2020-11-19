@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -45,19 +46,18 @@ class MainActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.tbMain)
         binding.mainViewModel = viewModel
+
+        binding.tvMainNotificationNobluetooth.visibility = View.VISIBLE
     }
 
     private fun observe(){
         viewModel.navigateToURL.observe(this, { event ->
-            Log.d(TAG, "navigateToURL")
             event.getContentIfNotHandled()?.let{
-                val intentURL = Intent(Intent.ACTION_VIEW, Uri.parse(it))
-                startActivity(intentURL)
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
             }
         })
 
         viewModel.snackbar.observe(this, { event ->
-            Log.d(TAG, "snackbar")
             event.getContentIfNotHandled()?.let{
                 Snackbar.make(binding.root, "$it", Snackbar.LENGTH_SHORT).show()
             }
@@ -70,7 +70,10 @@ class MainActivity : BaseActivity() {
                     -1 -> {
                     } // do nothing
                     0 -> showBleDialog()
-                    else -> binding.ivMainBle.setImageResource(R.drawable.image_main_ble_on)
+                    else -> {
+                        binding.ivMainBle.setImageResource(R.drawable.image_main_ble_on)
+                        binding.tvMainNotificationNobluetooth.visibility = View.GONE
+                    }
                 }
             } else {
                 Snackbar.make(
@@ -94,11 +97,6 @@ class MainActivity : BaseActivity() {
                 }
             }
         ).show()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume")
     }
 
     override fun onPause() {

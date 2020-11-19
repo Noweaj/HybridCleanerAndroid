@@ -2,9 +2,7 @@ package com.noweaj.android.hybridcleanerandroid.util
 
 import android.app.Application
 import android.util.Log
-import com.noweaj.android.hybridcleanerandroid.viewmodel.BatteryViewModelFactory
-import com.noweaj.android.hybridcleanerandroid.viewmodel.MainViewModelFactory
-import com.noweaj.android.hybridcleanerandroid.viewmodel.RemoteViewModelFactory
+import com.noweaj.android.hybridcleanerandroid.viewmodel.*
 
 object InjectionUtil {
 
@@ -16,12 +14,12 @@ object InjectionUtil {
         return RemoteViewModelFactory()
     }
 
-    fun provideDiagnosisAmbientViewModelFactory(){
-
+    fun provideDiagnosisAmbientViewModelFactory(): DiagnosisAmbientViewModelFactory {
+        return DiagnosisAmbientViewModelFactory()
     }
 
-    fun provideDiagnosisCliffViewModelFactory(){
-
+    fun provideDiagnosisCliffViewModelFactory(): DiagnosisCliffViewModelFactory {
+        return DiagnosisCliffViewModelFactory()
     }
 
     fun provideBatteryViewModelFactory(): BatteryViewModelFactory {

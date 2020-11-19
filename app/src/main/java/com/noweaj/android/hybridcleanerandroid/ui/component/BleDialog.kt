@@ -67,6 +67,7 @@ class BleDialog(val context: Context, private val dialogCallback: BleDialogCallb
         view.lv_dialog_ble_devices.adapter = mListViewAdapter
 
         dialog?.setCanceledOnTouchOutside(false)
+        dialog?.setCancelable(false)
         dialog?.show()
 
         scanLeDevice(true)

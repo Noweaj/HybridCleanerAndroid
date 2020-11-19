@@ -17,10 +17,10 @@ abstract class BaseActivity: AppCompatActivity() {
 
     private val TAG = BaseActivity::class.java.simpleName
 
+    abstract fun onBluetoothCheckDone(isBluetoothAvailable: Boolean)
+
     private val REQUEST_CODE_BLE = 1
     private val REQUEST_CODE_PERMISSION = 2
-
-    abstract fun onBluetoothCheckDone(isBluetoothAvailable: Boolean)
 
     override fun onStart() {
         super.onStart()

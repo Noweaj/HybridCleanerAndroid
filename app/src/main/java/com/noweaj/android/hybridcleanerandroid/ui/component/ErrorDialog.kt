@@ -49,7 +49,9 @@ class ErrorDialog(
         }
 
         dialog?.setCanceledOnTouchOutside(false)
+        dialog?.setCancelable(false)
         dialog?.show()
+
         return dialog as AlertDialog
     }
 

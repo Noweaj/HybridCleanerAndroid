@@ -10,9 +10,10 @@ V Center-CS UI
 - Firebase setup
 V Bluetooth UI
 - Bluetooth connection
-- Bluetooth data RxJava (hot observable)
-- Diagnosis BT
-- Battery BT
+V Bluetooth data RxJava (hot observable)
+- Remote BT
+V Diagnosis BT
+V Battery BT
 - Inquiry Firebase
 - Response Firebase
 - Login Firebase

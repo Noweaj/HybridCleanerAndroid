@@ -1,14 +1,12 @@
 package com.noweaj.android.hybridcleanerandroid.ui.main
 
 import android.animation.ObjectAnimator
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
@@ -28,6 +26,8 @@ class BatteryFragment: BaseFragment() {
     private lateinit var observerHandheld: Observer<Float>
     private lateinit var observerBase: Observer<Float>
     private lateinit var observerRobot: Observer<Float>
+    private lateinit var observerBluetoothConnection: Observer<Boolean>
+
     private var animatorHandheld: ObjectAnimator? = null
     private var animatorBase: ObjectAnimator? = null
     private var animatorRobot: ObjectAnimator? = null
@@ -43,27 +43,14 @@ class BatteryFragment: BaseFragment() {
     }
 
     private fun setUpUi(){
+        // indicate as "disconnected"
         binding.ssbmHandheld.productImage = R.drawable.image_battery_handheld
         binding.ssbmHandheld.progress = 0.toFloat()
         binding.ssbmBase.productImage = R.drawable.image_battery_base
         binding.ssbmBase.progress = 0.toFloat()
         binding.ssbmRobot.productImage = R.drawable.image_battery_robot
         binding.ssbmRobot.progress = 0.toFloat()
-        setConnectionStatus(
-            binding.tvBatteryBtconnectionHandheld,
-            R.string.text_battery_disconnected,
-            R.drawable.background_battery_disconnected
-        )
-        setConnectionStatus(
-            binding.tvBatteryBtconnectionBase,
-            R.string.text_battery_disconnected,
-            R.drawable.background_battery_disconnected
-        )
-        setConnectionStatus(
-            binding.tvBatteryBtconnectionRobot,
-            R.string.text_battery_disconnected,
-            R.drawable.background_battery_disconnected
-        )
+        setBatteryMetersDisconnected()
     }
 
     private fun setConnectionStatus(textView: TextView, msg: Int, background: Int){
@@ -116,19 +103,65 @@ class BatteryFragment: BaseFragment() {
             )
         }
         viewModel.batteryRobot.observe(viewLifecycleOwner, observerRobot)
+
+        observerBluetoothConnection = Observer {
+            if(!it){
+                setBatteryMetersDisconnected()
+            }
+        }
+        viewModel.bluetoothConnection.observe(viewLifecycleOwner, observerBluetoothConnection)
     }
 
     private fun setAnimation(meter: SenseBotBatteryMeter, before: Float, after: Float): ObjectAnimator {
         val objectAnimator = ObjectAnimator.ofFloat(meter, "progress", before, after)
         objectAnimator.interpolator = DecelerateInterpolator()
-        objectAnimator.duration = 1500
+        objectAnimator.duration = 1000
         return objectAnimator
+    }
+
+    private fun setBatteryMetersDisconnected(){
+        animatorHandheld = setAnimation(
+            binding.ssbmHandheld,
+            binding.ssbmHandheld.progress,
+            0.toFloat()
+        )
+        animatorHandheld!!.start()
+        setConnectionStatus(
+            binding.tvBatteryBtconnectionHandheld,
+            R.string.text_battery_disconnected,
+            R.drawable.background_battery_disconnected
+        )
+
+        animatorBase = setAnimation(
+            binding.ssbmBase,
+            binding.ssbmBase.progress,
+            0.toFloat()
+        )
+        animatorBase!!.start()
+        setConnectionStatus(
+            binding.tvBatteryBtconnectionBase,
+            R.string.text_battery_disconnected,
+            R.drawable.background_battery_disconnected
+        )
+
+        animatorRobot = setAnimation(
+            binding.ssbmRobot,
+            binding.ssbmRobot.progress,
+            0.toFloat()
+        )
+        animatorRobot!!.start()
+        setConnectionStatus(
+            binding.tvBatteryBtconnectionRobot,
+            R.string.text_battery_disconnected,
+            R.drawable.background_battery_disconnected
+        )
     }
 
     override fun removeObservers() {
         viewModel.batteryHandheld.removeObserver(observerHandheld)
         viewModel.batteryBase.removeObserver(observerBase)
         viewModel.batteryRobot.removeObserver(observerRobot)
+        viewModel.bluetoothConnection.removeObserver(observerBluetoothConnection)
     }
 
     override fun onDataReceived(data: String) {
