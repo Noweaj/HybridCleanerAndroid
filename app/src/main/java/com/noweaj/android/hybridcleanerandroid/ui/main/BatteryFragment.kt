@@ -12,11 +12,11 @@ import androidx.lifecycle.Observer
 import com.android.noweaj.sensebotbatterylibrary.SenseBotBatteryMeter
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.databinding.FragmentBatteryBinding
-import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragment
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseBleFragment
 import com.noweaj.android.hybridcleanerandroid.util.InjectionUtil
 import com.noweaj.android.hybridcleanerandroid.viewmodel.BatteryViewModel
 
-class BatteryFragment: BaseFragment() {
+class BatteryFragment: BaseBleFragment() {
 
     private val viewModel: BatteryViewModel by viewModels {
         InjectionUtil.provideBatteryViewModelFactory()

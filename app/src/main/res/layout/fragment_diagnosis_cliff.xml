@@ -3,7 +3,7 @@
 
     <data>
         <variable
-            name="diagnosisCliffViewModel"
+            name="viewModel"
             type="com.noweaj.android.hybridcleanerandroid.viewmodel.DiagnosisCliffViewModel" />
     </data>
 

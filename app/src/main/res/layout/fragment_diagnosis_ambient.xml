@@ -3,7 +3,7 @@
     
     <data>
         <variable
-            name="diagnosisAmbientViewModel"
+            name="viewModel"
             type="com.noweaj.android.hybridcleanerandroid.viewmodel.DiagnosisAmbientViewModel" />
     </data>
 

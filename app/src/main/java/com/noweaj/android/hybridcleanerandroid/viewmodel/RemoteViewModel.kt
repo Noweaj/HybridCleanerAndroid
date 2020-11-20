@@ -8,29 +8,19 @@ import org.json.JSONObject
 
 class RemoteViewModel: BaseViewModel() {
 
-    // operatingMode:
-    // 1 -> auto
-    // 2 -> manual
-    private val _operatingMode = MutableLiveData<Int>()
-    val operatingMode: LiveData<Int>
-        get() = _operatingMode
-
-    private val _manualForward = MutableLiveData<SingleEvent<Unit>>()
-    val manualForward: LiveData<SingleEvent<Unit>>
-        get() = _manualForward
-
-    private val _manualStop = MutableLiveData<SingleEvent<Unit>>()
-    val manualStop: LiveData<SingleEvent<Unit>>
-        get() = _manualStop
-
-    private val _manualBackward = MutableLiveData<SingleEvent<Unit>>()
-    val manualBackward: LiveData<SingleEvent<Unit>>
-        get() = _manualBackward
+    // mode
+    // -1 -> auto
+    // 0 -> stop
+    // 1 -> forward
+    // 2 -> backward
+    private val _setOperatingMode = MutableLiveData<Int>()
+    val setOperatingMode: LiveData<Int>
+        get() = _setOperatingMode
 
     override fun onConnected(data: String) {
         val baseObject = JSONObject(data).getJSONArray("devices").getJSONObject(0)
         val opMode = baseObject.getInt("OpMode")
-        _operatingMode.postValue(opMode)
+        _setOperatingMode.postValue(opMode)
     }
 
     override fun onDisconnected() {
@@ -38,21 +28,22 @@ class RemoteViewModel: BaseViewModel() {
     }
 
     fun onAutoModeButtonPressed(){
-        _operatingMode.postValue(1)
+//        _setOperatingMode.postValue(-1)
+        // send ble signal
     }
 
     fun onForwardButtonPressed(){
-        _operatingMode.postValue(2)
-        _manualForward.postValue(null)
+//        _setOperatingMode.postValue(1)
+        // send ble signal
     }
 
     fun onStopButtonPressed(){
-        _operatingMode.postValue(2)
-        _manualStop.postValue(null)
+//        _setOperatingMode.postValue(0)
+        // send ble signal
     }
 
     fun onBackwardButtonPressed(){
-        _operatingMode.postValue(2)
-        _manualStop.postValue(null)
+//        _setOperatingMode.postValue(2)
+        // send ble signal
     }
 }

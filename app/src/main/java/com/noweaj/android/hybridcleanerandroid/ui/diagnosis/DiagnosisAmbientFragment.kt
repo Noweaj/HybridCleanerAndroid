@@ -9,12 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.noweaj.android.hybridcleanerandroid.databinding.FragmentDiagnosisAmbientBinding
-import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragment
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseBleFragment
 import com.noweaj.android.hybridcleanerandroid.util.InjectionUtil
 
 import com.noweaj.android.hybridcleanerandroid.viewmodel.DiagnosisAmbientViewModel
 
-class DiagnosisAmbientFragment: BaseFragment() {
+class DiagnosisAmbientFragment: BaseBleFragment() {
 
     private val TAG = DiagnosisAmbientFragment::class.java.simpleName
 
@@ -31,7 +31,7 @@ class DiagnosisAmbientFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDiagnosisAmbientBinding.inflate(inflater, container, false)
-        binding.diagnosisAmbientViewModel = viewModel
+        binding.viewModel = viewModel
 
         setUpUi()
         return binding.root
@@ -48,14 +48,14 @@ class DiagnosisAmbientFragment: BaseFragment() {
         observerAmbient = Observer {
             Log.d(TAG, "it: $it")
         }
-        binding.diagnosisAmbientViewModel!!.isAmbientDark.observe(viewLifecycleOwner, observerAmbient)
+        binding.viewModel!!.isAmbientDark.observe(viewLifecycleOwner, observerAmbient)
     }
 
     override fun removeObservers() {
-        binding.diagnosisAmbientViewModel!!.isAmbientDark.removeObserver(observerAmbient)
+        binding.viewModel!!.isAmbientDark.removeObserver(observerAmbient)
     }
 
     override fun onDataReceived(data: String) {
-        binding.diagnosisAmbientViewModel!!.processData(data)
+        binding.viewModel!!.processData(data)
     }
 }

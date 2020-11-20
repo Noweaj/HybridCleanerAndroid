@@ -10,11 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.noweaj.android.hybridcleanerandroid.data.CliffSensorData
 import com.noweaj.android.hybridcleanerandroid.databinding.FragmentDiagnosisCliffBinding
-import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragment
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseBleFragment
 import com.noweaj.android.hybridcleanerandroid.util.InjectionUtil
 import com.noweaj.android.hybridcleanerandroid.viewmodel.DiagnosisCliffViewModel
 
-class DiagnosisCliffFragment: BaseFragment() {
+class DiagnosisCliffFragment: BaseBleFragment() {
 
     private val TAG = DiagnosisCliffFragment::class.java.simpleName
 
@@ -31,7 +31,7 @@ class DiagnosisCliffFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDiagnosisCliffBinding.inflate(inflater, container, false)
-        binding.diagnosisCliffViewModel = viewModel
+        binding.viewModel = viewModel
 
         setUpUi()
         return binding.root
@@ -47,14 +47,14 @@ class DiagnosisCliffFragment: BaseFragment() {
         observerCliff = Observer {
             Log.d(TAG, "it: ${it.topLeft} ${it.topRight} ${it.botLeft} ${it.botRight}")
         }
-        binding.diagnosisCliffViewModel!!.cliffSensorData.observe(viewLifecycleOwner, observerCliff)
+        binding.viewModel!!.cliffSensorData.observe(viewLifecycleOwner, observerCliff)
     }
 
     override fun removeObservers() {
-        binding.diagnosisCliffViewModel!!.cliffSensorData.removeObserver(observerCliff)
+        binding.viewModel!!.cliffSensorData.removeObserver(observerCliff)
     }
 
     override fun onDataReceived(data: String) {
-        binding.diagnosisCliffViewModel!!.processData(data)
+        binding.viewModel!!.processData(data)
     }
 }

@@ -1,20 +1,18 @@
 package com.noweaj.android.hybridcleanerandroid.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.noweaj.android.hybridcleanerandroid.data.SingleEvent
+import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.databinding.FragmentRemoteBinding
-import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragment
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseBleFragment
 import com.noweaj.android.hybridcleanerandroid.util.InjectionUtil
 import com.noweaj.android.hybridcleanerandroid.viewmodel.RemoteViewModel
 
-class RemoteFragment: BaseFragment() {
+class RemoteFragment: BaseBleFragment() {
 
     private val TAG = RemoteFragment::class.java.simpleName
 
@@ -24,9 +22,8 @@ class RemoteFragment: BaseFragment() {
 
     private lateinit var binding: FragmentRemoteBinding
     private lateinit var observerOperatingMode: Observer<Int>
-    private lateinit var observerManualForward: Observer<SingleEvent<Unit>>
-    private lateinit var observerManualStop: Observer<SingleEvent<Unit>>
-    private lateinit var observerManualBackward: Observer<SingleEvent<Unit>>
+
+    private var currentMode: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +31,7 @@ class RemoteFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRemoteBinding.inflate(inflater, container, false)
-        binding.remoteViewModel = viewModel
+        binding.viewModel = viewModel
 
         setUpUi()
         return binding.root
@@ -44,49 +41,24 @@ class RemoteFragment: BaseFragment() {
 
     }
 
-    private fun setAutoMode(){
-
-    }
-
-    private fun setManualMode(){
-
+    private fun setOperatingMode(mode: Int){
+        if(mode < 0){ // auto
+            binding.ivRemoteMode.setImageResource(R.drawable.image_remote_mode_auto)
+        } else { // manual
+            binding.ivRemoteMode.setImageResource(R.drawable.image_remote_mode_manual)
+        }
     }
 
     override fun addObservers() {
-        observerOperatingMode = Observer {
-            Log.d(TAG, "OperatingMode: $it")
-            if(it == 1){
-                // auto mode
-            } else {
-                // manual mode
-            }
-        }
-        binding.remoteViewModel!!.operatingMode.observe(viewLifecycleOwner, observerOperatingMode)
-
-        observerManualForward = Observer {
-            // forward
-        }
-        binding.remoteViewModel!!.manualForward.observe(viewLifecycleOwner, observerManualForward)
-
-        observerManualStop = Observer {
-            // stop
-        }
-        binding.remoteViewModel!!.manualStop.observe(viewLifecycleOwner, observerManualStop)
-
-        observerManualBackward = Observer {
-            // backward
-        }
-        binding.remoteViewModel!!.manualBackward.observe(viewLifecycleOwner, observerManualBackward)
+        observerOperatingMode = Observer { setOperatingMode(it) }
+        binding.viewModel!!.setOperatingMode.observe(viewLifecycleOwner, observerOperatingMode)
     }
 
     override fun removeObservers() {
-        binding.remoteViewModel!!.operatingMode.removeObserver(observerOperatingMode)
-        binding.remoteViewModel!!.manualForward.removeObserver(observerManualForward)
-        binding.remoteViewModel!!.manualStop.removeObserver(observerManualStop)
-        binding.remoteViewModel!!.manualBackward.removeObserver(observerManualBackward)
+        binding.viewModel!!.setOperatingMode.removeObserver(observerOperatingMode)
     }
 
     override fun onDataReceived(data: String) {
-        binding.remoteViewModel!!.processData(data)
+        binding.viewModel!!.processData(data)
     }
 }

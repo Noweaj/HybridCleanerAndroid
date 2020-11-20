@@ -25,7 +25,7 @@ class BleDataPublishTest {
                             "      \"BotSen\": \"265,357,2230,1990\",\n" +
                             "      \"AmSen\": 2806,\n" +
                             "      \"Dock\": 1,\n" +
-                            "      \"OpMode\": 1,\n" +
+                            "      \"OpMode\": -1,\n" +
                             "      \"ErrCode\": 0\n" +
                             "    },\n" +
                             "    {\n" +
