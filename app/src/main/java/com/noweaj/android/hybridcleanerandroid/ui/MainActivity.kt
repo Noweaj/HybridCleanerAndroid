@@ -50,6 +50,7 @@ class MainActivity : BaseActivity() {
         binding.tvMainNotificationNobluetooth.visibility = View.VISIBLE
     }
 
+
     private fun observe(){
         viewModel.navigateToURL.observe(this, { event ->
             event.getContentIfNotHandled()?.let{

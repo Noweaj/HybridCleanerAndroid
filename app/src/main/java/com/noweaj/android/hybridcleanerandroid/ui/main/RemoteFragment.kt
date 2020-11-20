@@ -43,9 +43,9 @@ class RemoteFragment: BaseBleFragment() {
 
     private fun setOperatingMode(mode: Int){
         if(mode < 0){ // auto
-            binding.ivRemoteMode.setImageResource(R.drawable.image_remote_mode_auto)
+            binding.ivRemoteMode.setImageResource(R.drawable.image_remote_mode_auto_blue)
         } else { // manual
-            binding.ivRemoteMode.setImageResource(R.drawable.image_remote_mode_manual)
+            binding.ivRemoteMode.setImageResource(R.drawable.image_remote_mode_manual_blue)
         }
     }
 

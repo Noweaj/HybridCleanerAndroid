@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.databinding.FragmentDiagnosisAmbientBinding
 import com.noweaj.android.hybridcleanerandroid.ui.core.BaseBleFragment
 import com.noweaj.android.hybridcleanerandroid.util.InjectionUtil
@@ -24,6 +25,7 @@ class DiagnosisAmbientFragment: BaseBleFragment() {
 
     private lateinit var binding: FragmentDiagnosisAmbientBinding
     private lateinit var observerAmbient: Observer<Boolean>
+    private lateinit var observerDisconnected: Observer<Boolean>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,20 +44,57 @@ class DiagnosisAmbientFragment: BaseBleFragment() {
             findNavController().navigate(
                 DiagnosisAmbientFragmentDirections.actionAmbientFragmentToCliffFragment())
         }
+        binding.ivDiagnosisAmbientSensor.visibility = View.INVISIBLE
     }
 
     override fun addObservers() {
         observerAmbient = Observer {
             Log.d(TAG, "it: $it")
+            binding.ivDiagnosisAmbientSensor.visibility = View.VISIBLE
+            setPosition()
+            if(it){
+                binding.ivDiagnosisAmbientSensor.setImageResource(R.drawable.image_diagnosis_sensor_on)
+            } else {
+                binding.ivDiagnosisAmbientSensor.setImageResource(R.drawable.image_diagnosis_sensor_off)
+            }
         }
-        binding.viewModel!!.isAmbientDark.observe(viewLifecycleOwner, observerAmbient)
+        binding.viewModel!!.isBright.observe(viewLifecycleOwner, observerAmbient)
+
+        observerDisconnected = Observer {
+            if(it)
+                binding.ivDiagnosisAmbientSensor.visibility = View.INVISIBLE
+        }
+        binding.viewModel!!.disconnected.observe(viewLifecycleOwner, observerDisconnected)
+    }
+
+    private fun setPosition(){
+        val lightX = binding.ivDiagnosisAmbientBody.x + (binding.ivDiagnosisAmbientBody.width * 0.15)
+        val lightY = binding.ivDiagnosisAmbientBody.y + (binding.ivDiagnosisAmbientBody.height * 0.16)
+
+        binding.ivDiagnosisAmbientSensor.x = lightX.toFloat()
+        binding.ivDiagnosisAmbientSensor.y = lightY.toFloat()
     }
 
     override fun removeObservers() {
-        binding.viewModel!!.isAmbientDark.removeObserver(observerAmbient)
+        binding.viewModel!!.isBright.removeObserver(observerAmbient)
+        binding.viewModel!!.disconnected.removeObserver(observerDisconnected)
     }
 
     override fun onDataReceived(data: String) {
         binding.viewModel!!.processData(data)
     }
 }
+
+/**
+width x height
+
+402 x 337
+
+68 x 66
+
+0.16915 x 0.19584
+
+57 x 57
+
+0.14179 x 0.16914
+        **/

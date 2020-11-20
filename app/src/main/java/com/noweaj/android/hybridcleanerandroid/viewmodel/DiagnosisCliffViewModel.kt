@@ -11,8 +11,12 @@ class DiagnosisCliffViewModel: BaseViewModel() {
 
     private val TAG = DiagnosisCliffViewModel::class.java.simpleName
 
-    private val _cliffSensorData = MutableLiveData<CliffSensorData>()
-    val cliffSensorData: LiveData<CliffSensorData>
+    private val _disconnected = MutableLiveData<Boolean>()
+    val disconnected: LiveData<Boolean>
+        get() = _disconnected
+
+    private val _cliffSensorData = MutableLiveData<Array<Boolean>>()
+    val cliffSensorData: LiveData<Array<Boolean>>
         get() = _cliffSensorData
 
     override fun onConnected(data: String) {
@@ -21,16 +25,16 @@ class DiagnosisCliffViewModel: BaseViewModel() {
 
         val tokens = cliffSensorValue.split(",")
         _cliffSensorData.postValue(
-            CliffSensorData(
-                topLeft = Integer.parseInt(tokens[0]) > 1500,
-                topRight = Integer.parseInt(tokens[1]) > 1500,
-                botLeft = Integer.parseInt(tokens[2]) > 1500,
-                botRight = Integer.parseInt(tokens[3]) > 1500
+            arrayOf(
+                Integer.parseInt(tokens[0]) > 1500,
+                Integer.parseInt(tokens[1]) > 1500,
+                Integer.parseInt(tokens[2]) > 1500,
+                Integer.parseInt(tokens[3]) > 1500
             )
         )
     }
 
     override fun onDisconnected() {
-
+        _disconnected.postValue(true)
     }
 }

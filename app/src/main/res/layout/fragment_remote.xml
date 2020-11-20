@@ -63,7 +63,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintWidth_percent=".5"
                 android:onClick="@{() -> viewModel.onForwardButtonPressed()}"
                 android:background="@drawable/selector_remote_button_forward"/>
