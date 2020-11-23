@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.noweaj.android.hybridcleanerandroid.R
@@ -32,11 +33,19 @@ class SplashActivity: BaseActivity() {
 //            finish()
 //        }
 //        Handler().postDelayed(r, 2000L)
+
+        showInfo()
     }
 
     override fun onBluetoothCheckDone(isBluetoothAvailable: Boolean) {
         val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
         finish()
+    }
+
+    private fun showInfo(){
+        var displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        Log.d(TAG, "display dpi: ${displayMetrics.densityDpi}")
     }
 }

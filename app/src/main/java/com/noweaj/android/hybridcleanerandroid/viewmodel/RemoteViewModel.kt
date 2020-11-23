@@ -2,6 +2,7 @@ package com.noweaj.android.hybridcleanerandroid.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.noweaj.android.hybridcleanerandroid.ble.BleDataTransmitter
 import com.noweaj.android.hybridcleanerandroid.data.SingleEvent
 import com.noweaj.android.hybridcleanerandroid.ui.core.BaseViewModel
 import org.json.JSONObject
@@ -28,22 +29,26 @@ class RemoteViewModel: BaseViewModel() {
     }
 
     fun onAutoModeButtonPressed(){
-//        _setOperatingMode.postValue(-1)
         // send ble signal
+        val bleDataTransmitter = BleDataTransmitter.getInstance()
+        bleDataTransmitter.sendOperMode(-1)
     }
 
     fun onForwardButtonPressed(){
-//        _setOperatingMode.postValue(1)
         // send ble signal
+        val bleDataTransmitter = BleDataTransmitter.getInstance()
+        bleDataTransmitter.sendOperMode(1)
     }
 
     fun onStopButtonPressed(){
-//        _setOperatingMode.postValue(0)
         // send ble signal
+        val bleDataTransmitter = BleDataTransmitter.getInstance()
+        bleDataTransmitter.sendOperMode(0)
     }
 
     fun onBackwardButtonPressed(){
-//        _setOperatingMode.postValue(2)
         // send ble signal
+        val bleDataTransmitter = BleDataTransmitter.getInstance()
+        bleDataTransmitter.sendOperMode(2)
     }
 }

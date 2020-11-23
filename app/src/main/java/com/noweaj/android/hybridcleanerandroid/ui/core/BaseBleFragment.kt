@@ -1,5 +1,7 @@
 package com.noweaj.android.hybridcleanerandroid.ui.core
 
+import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.noweaj.android.hybridcleanerandroid.ble.BleDataReceiver
@@ -47,5 +49,25 @@ abstract class BaseBleFragment: Fragment() {
         } else {
             Log.d(TAG, "Subscriber already disposed")
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d(TAG, "BaseFragment::onAttach")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d(TAG, "BaseFragment::onDetach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(TAG, "BaseFragment::onCreate")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "BaseFragment::onDestroy")
     }
 }

@@ -26,6 +26,7 @@ class BatteryFragment: BaseBleFragment() {
     private lateinit var observerHandheld: Observer<Float>
     private lateinit var observerBase: Observer<Float>
     private lateinit var observerRobot: Observer<Float>
+    private lateinit var observerHandheldDetached: Observer<Float>
     private lateinit var observerBluetoothConnection: Observer<Boolean>
 
     private var animatorHandheld: ObjectAnimator? = null
@@ -104,6 +105,33 @@ class BatteryFragment: BaseBleFragment() {
         }
         viewModel.batteryRobot.observe(viewLifecycleOwner, observerRobot)
 
+        observerHandheldDetached = Observer {
+            animatorHandheld = setAnimation(
+                binding.ssbmHandheld,
+                binding.ssbmHandheld.progress,
+                it
+            )
+            animatorHandheld!!.start()
+            setConnectionStatus(
+                binding.tvBatteryBtconnectionHandheld,
+                R.string.text_battery_disconnected,
+                R.drawable.background_battery_disconnected
+            )
+
+            animatorRobot = setAnimation(
+                binding.ssbmRobot,
+                binding.ssbmRobot.progress,
+                it
+            )
+            animatorRobot!!.start()
+            setConnectionStatus(
+                binding.tvBatteryBtconnectionRobot,
+                R.string.text_battery_disconnected,
+                R.drawable.background_battery_disconnected
+            )
+        }
+        viewModel.handheldDetached.observe(viewLifecycleOwner, observerHandheldDetached)
+
         observerBluetoothConnection = Observer {
             if(!it){
                 setBatteryMetersDisconnected()
@@ -161,6 +189,7 @@ class BatteryFragment: BaseBleFragment() {
         viewModel.batteryHandheld.removeObserver(observerHandheld)
         viewModel.batteryBase.removeObserver(observerBase)
         viewModel.batteryRobot.removeObserver(observerRobot)
+        viewModel.handheldDetached.removeObserver(observerHandheldDetached)
         viewModel.bluetoothConnection.removeObserver(observerBluetoothConnection)
     }
 

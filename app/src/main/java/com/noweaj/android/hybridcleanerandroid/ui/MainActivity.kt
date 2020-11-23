@@ -32,7 +32,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         initUi()
 
-        BleDataPublishTest()
+        val bleDataPublishTest = BleDataPublishTest.getInstance()
+        bleDataPublishTest.start()
     }
 
     override fun onBluetoothCheckDone(isBluetoothAvailable: Boolean) {
@@ -103,6 +104,10 @@ class MainActivity : BaseActivity() {
     override fun onPause() {
         super.onPause()
         dialog?.let{ dialog!!.dismiss() }
+
+
+        val bleDataPublishTest = BleDataPublishTest.getInstance()
+        bleDataPublishTest.stop()
     }
 
     override fun onStop() {
