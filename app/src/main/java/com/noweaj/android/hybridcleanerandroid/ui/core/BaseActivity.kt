@@ -11,7 +11,7 @@ import android.os.Build
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.noweaj.android.hybridcleanerandroid.R
-import com.noweaj.android.hybridcleanerandroid.ui.component.ErrorDialog
+import com.noweaj.android.hybridcleanerandroid.ui.component.BaseDialog
 
 abstract class BaseActivity: AppCompatActivity() {
 
@@ -68,24 +68,28 @@ abstract class BaseActivity: AppCompatActivity() {
 
     private fun showAlertDialog(cause: String, msg: String){
         // show alert dialog
-        dialog = ErrorDialog(
+        dialog = BaseDialog(
             context = this,
-            onNoBluetoothCallback = object : ErrorDialog.ErrorDialogCallback{
+            getString(R.string.text_dialog_err_title),
+            onButton1Callback = object : BaseDialog.BaseDialogCallback{
                 override fun onDialogFinished() {
                     onBluetoothCheckDone(false)
                 }
             },
-            onRetryCallback = object : ErrorDialog.ErrorDialogCallback {
+            onButton2Callback = object : BaseDialog.BaseDialogCallback {
                 override fun onDialogFinished() {
                     checkBluetooth()
                 }
             },
-            onExitCallback = object : ErrorDialog.ErrorDialogCallback {
+            onExitCallback = object : BaseDialog.BaseDialogCallback {
                 override fun onDialogFinished() {
                     finish()
                 }
-            }
-        ).show(cause, msg)
+            },
+            cause,
+            msg
+        ).build()
+        dialog!!.show()
     }
 
     override fun onActivityResult(

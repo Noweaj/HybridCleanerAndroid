@@ -10,8 +10,16 @@
     <string name="title_tab_main_diagnosis">센서진단</string>
     <string name="title_tab_main_battery">배터리</string>
     <string name="title_tab_main_cs">고객센터</string>
-    <string name="text_snackbar_invaliddevice">연결에 실패하였습니다 - 잘못된 기기 연결 시도</string>
-    <string name="text_snackbar_bluetoothnotavailable">해당 기기는 블루투스 연결이 불가능 합니다.</string>
+    <string name="text_main_snackbar_invaliddevice">연결에 실패하였습니다 - 잘못된 기기 연결 시도</string>
+    <string name="text_main_snackbar_bluetoothnotavailable">해당 기기는 블루투스 연결이 불가능 합니다.</string>
+    <string name="text_main_error_message">오류가 발생하였습니다. 전원을 끄고 재기동 하거나 지속적으로 해당 문제가 발생하는 경우 고객센터에 문의해 주시기 바랍니다.</string>
+    <string name="text_main_snackbar_error_ignore">\'무시하기\'를 선택하였습니다. 문제있는 경우 꼭 AS센터로 문의해 주세요.</string>
+
+    // erro message
+    <string name="text_errorcode_battvolt">배터리 과전압 위헙</string>
+    <string name="text_errorcode_batttemp">배터리 과열 위험</string>
+    <string name="text_errorcode_chgcurr">배터리 과전류 위험</string>
+    <string name="text_errorcode_motcurr">모터 과전류 위험</string>
 
     // ble dialog
     <string name="text_dialog_ble_title">센스봇 연결</string>

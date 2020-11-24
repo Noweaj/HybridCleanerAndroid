@@ -1,13 +1,11 @@
 package com.noweaj.android.hybridcleanerandroid.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.noweaj.android.hybridcleanerandroid.ui.core.BaseViewModel
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragmentViewModel
 import org.json.JSONObject
 
-class BatteryViewModel: BaseViewModel() {
+class BatteryViewModel: BaseFragmentViewModel() {
 
     private val TAG = BatteryViewModel::class.java.simpleName
 

@@ -11,7 +11,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.data.SingleEvent
+import com.noweaj.android.hybridcleanerandroid.test.BleDataPublishTest
+import com.noweaj.android.hybridcleanerandroid.util.ErrorCheckUtil
 import com.noweaj.android.hybridcleanerandroid.util.NullCheckUtil
+import org.json.JSONObject
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
 
@@ -33,6 +36,14 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     val bleStatus: LiveData<Int>
         get() = _bleStatus
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
+
+    private val _bleDisconnected = MutableLiveData<SingleEvent<Boolean>>()
+    val bleDisconnected: LiveData<SingleEvent<Boolean>>
+        get() = _bleDisconnected
+
     private val sharedPreferences = getApplication<Application>().getSharedPreferences(
         getApplication<Application>().getString(R.string.preference_ble),
         Context.MODE_PRIVATE
@@ -40,11 +51,11 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val editor = sharedPreferences.edit()
 
     init{
-        val autoConnectDeviceAddress = sharedPreferences.getString("DEVICE_ADDRESS", null)
-        Log.d(TAG, "autoConnectDeviceAddress: $autoConnectDeviceAddress")
-        if(autoConnectDeviceAddress != null)
-            setConnection("FineHybrid", autoConnectDeviceAddress)
-        else
+//        val autoConnectDeviceAddress = sharedPreferences.getString("DEVICE_ADDRESS", null)
+//        Log.d(TAG, "autoConnectDeviceAddress: $autoConnectDeviceAddress")
+//        if(autoConnectDeviceAddress != null)
+//            setConnection("FineHybrid", autoConnectDeviceAddress)
+//        else
             setBleStatus(0)
     }
 
@@ -52,7 +63,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     fun setConnection(deviceName: String?, deviceAddress: String?){
         NullCheckUtil.ifNotNull(deviceName, deviceAddress){ deviceName_, deviceAddress_ ->
-            if(deviceName_ == "FineHybrid") {
+            if(/*deviceName_ == "FineHybrid"*/ true) { // for test
                 connectToDevice(deviceAddress_)
                 editor.putString("DEVICE_ADDRESS", deviceAddress_)
                 editor.apply()
@@ -60,7 +71,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                 return
             } else {
                 _snackbar.value = SingleEvent(
-                    getApplication<Application>().getString(R.string.text_snackbar_invaliddevice)
+                    getApplication<Application>().getString(R.string.text_main_snackbar_invaliddevice)
                 )
             }
         }
@@ -69,6 +80,35 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private fun connectToDevice(deviceAddress: String){
         // connect to device
+
+        // test runner start
+        val bleDataPublishTest = BleDataPublishTest.getInstance()
+        bleDataPublishTest.start()
+    }
+
+    fun disconnectDevice(){
+        // disconnect connection
+
+        // test runner stop
+        val bleDataPublishTest = BleDataPublishTest.getInstance()
+        bleDataPublishTest.stop()
+    }
+
+    fun onDataReceived(data: String){
+        Log.d(TAG, "onDataReceived")
+        val status = JSONObject(data).getInt("status")
+        if(status < 0)
+            _bleDisconnected.postValue(SingleEvent(true))
+        ErrorCheckUtil.getErrorMessage(data, getApplication())?.let {
+            Log.d(TAG, "getErrorMessage $status")
+            val stringBuilder = StringBuilder()
+            for(i in it.indices){
+                stringBuilder.append("${it.get(i)}\n")
+            }
+            Log.d(TAG, "getErrorMessage: ${stringBuilder.toString()}")
+            if(stringBuilder.toString().trim().isNotEmpty())
+                _errorMessage.postValue(stringBuilder.toString())
+        }
     }
 
     fun onBleClicked(){

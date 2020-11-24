@@ -3,11 +3,10 @@ package com.noweaj.android.hybridcleanerandroid.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.noweaj.android.hybridcleanerandroid.ble.BleDataTransmitter
-import com.noweaj.android.hybridcleanerandroid.data.SingleEvent
-import com.noweaj.android.hybridcleanerandroid.ui.core.BaseViewModel
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragmentViewModel
 import org.json.JSONObject
 
-class RemoteViewModel: BaseViewModel() {
+class RemoteViewModel: BaseFragmentViewModel() {
 
     // mode
     // -1 -> auto

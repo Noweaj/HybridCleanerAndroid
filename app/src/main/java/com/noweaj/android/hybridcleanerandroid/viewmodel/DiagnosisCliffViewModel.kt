@@ -1,13 +1,11 @@
 package com.noweaj.android.hybridcleanerandroid.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.noweaj.android.hybridcleanerandroid.data.CliffSensorData
-import com.noweaj.android.hybridcleanerandroid.ui.core.BaseViewModel
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragmentViewModel
 import org.json.JSONObject
 
-class DiagnosisCliffViewModel: BaseViewModel() {
+class DiagnosisCliffViewModel: BaseFragmentViewModel() {
 
     private val TAG = DiagnosisCliffViewModel::class.java.simpleName
 

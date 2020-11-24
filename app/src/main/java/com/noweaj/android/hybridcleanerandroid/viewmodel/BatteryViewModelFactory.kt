@@ -1,6 +1,5 @@
 package com.noweaj.android.hybridcleanerandroid.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 

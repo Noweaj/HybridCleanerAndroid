@@ -1,14 +1,11 @@
 package com.noweaj.android.hybridcleanerandroid.viewmodel
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.noweaj.android.hybridcleanerandroid.ui.core.BaseViewModel
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseFragmentViewModel
 import org.json.JSONObject
 
-class DiagnosisAmbientViewModel: BaseViewModel() {
+class DiagnosisAmbientViewModel: BaseFragmentViewModel() {
 
     private val TAG = DiagnosisAmbientViewModel::class.java.simpleName
 

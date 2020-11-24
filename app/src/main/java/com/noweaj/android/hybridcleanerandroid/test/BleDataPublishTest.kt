@@ -293,7 +293,7 @@ class BleDataPublishTest {
                 override fun run() {
                     val data = getBleData(cnt)
                     // send
-//                    Log.d(TAG, "data:\n$data")
+                    Log.d(TAG, "data:\n$data")
                     publishSubject.onNext(data)
                     cnt++
                 }
@@ -310,6 +310,10 @@ class BleDataPublishTest {
         return if(isRunning) {
             timer.cancel()
             isRunning = false
+            publishSubject.onNext("{\n" +
+                    "  \"status\": -1\n" +
+                    "}")
+            this.cnt = 0
             true
         } else {
             false

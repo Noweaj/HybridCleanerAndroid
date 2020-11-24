@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.json.JSONObject
 
-abstract class BaseViewModel: ViewModel() {
+abstract class BaseFragmentViewModel: ViewModel() {
 
     abstract fun onConnected(data: String)
     abstract fun onDisconnected()

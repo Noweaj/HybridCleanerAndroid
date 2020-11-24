@@ -1,19 +1,10 @@
 package com.noweaj.android.hybridcleanerandroid.ui
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import android.app.Activity
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothManager
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.noweaj.android.hybridcleanerandroid.R
-import com.noweaj.android.hybridcleanerandroid.ui.component.ErrorDialog
 import com.noweaj.android.hybridcleanerandroid.ui.core.BaseActivity
 
 class SplashActivity: BaseActivity() {
