@@ -4,10 +4,12 @@ import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.noweaj.android.hybridcleanerandroid.R
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseDialog
 import kotlinx.android.synthetic.main.dialog_base.view.*
 
-class BaseDialog(
+class BasicDialog(
     context: Context,
+    val view: View,
     private val title: String,
     private val onButton1Callback: BaseDialogCallback,
     private val onButton2Callback: BaseDialogCallback,
@@ -15,24 +17,12 @@ class BaseDialog(
     private val cause: String,
     private val msg: String,
     vararg val button: String
-) {
-
-    interface BaseDialogCallback {
-        fun onDialogFinished()
-    }
-
-    private val builder: AlertDialog.Builder by lazy {
-        AlertDialog.Builder(context).setView(view)
-    }
-
-    private val view: View by lazy {
-        View.inflate(context, R.layout.dialog_base, null)
-    }
-
-    private var dialog: AlertDialog? = null
+): BaseDialog(context, view) {
 
     fun build(): AlertDialog {
         dialog = builder.create()
+        dialog?.setCanceledOnTouchOutside(false)
+        dialog?.setCancelable(false)
 
         view.tv_dialog_base_title.text = title
         view.tv_dialog_base_cause.text = "$cause"
@@ -69,15 +59,5 @@ class BaseDialog(
         }
 
         return dialog as AlertDialog
-    }
-
-    fun show(){
-        dialog?.setCanceledOnTouchOutside(false)
-        dialog?.setCancelable(false)
-        dialog?.show()
-    }
-
-    fun dismiss(){
-        dialog?.dismiss()
     }
 }

@@ -1,7 +1,6 @@
 package com.noweaj.android.hybridcleanerandroid.ui
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,15 +10,15 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.ble.BleDataReceiver
 import com.noweaj.android.hybridcleanerandroid.data.SingleEvent
 import com.noweaj.android.hybridcleanerandroid.databinding.ActivityMainBinding
 import com.noweaj.android.hybridcleanerandroid.ui.component.BleDialog
-import com.noweaj.android.hybridcleanerandroid.ui.component.BaseDialog
+import com.noweaj.android.hybridcleanerandroid.ui.component.BasicDialog
 import com.noweaj.android.hybridcleanerandroid.ui.core.BaseActivity
+import com.noweaj.android.hybridcleanerandroid.ui.core.BaseDialog
 import com.noweaj.android.hybridcleanerandroid.util.InjectionUtil
 import com.noweaj.android.hybridcleanerandroid.viewmodel.MainViewModel
 import io.reactivex.disposables.Disposable
@@ -116,8 +115,9 @@ class MainActivity : BaseActivity() {
         observerErrorMessage = Observer {
             Log.d(TAG, "$it")
             errorDialog?.let { return@Observer }
-            errorDialog = BaseDialog(
+            errorDialog = BasicDialog(
                 context = this,
+                View.inflate(this, R.layout.dialog_base, null),
                 getString(R.string.text_dialog_err_title),
                 onButton1Callback = object: BaseDialog.BaseDialogCallback{
                     override fun onDialogFinished() {
@@ -231,8 +231,9 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        exitDialog = BaseDialog(
+        exitDialog = BasicDialog(
             context = this,
+            View.inflate(this, R.layout.dialog_base, null),
             "종료",
             onButton1Callback = object: BaseDialog.BaseDialogCallback{
                 override fun onDialogFinished() {

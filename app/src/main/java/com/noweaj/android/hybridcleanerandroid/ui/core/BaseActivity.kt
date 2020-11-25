@@ -8,10 +8,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.noweaj.android.hybridcleanerandroid.R
-import com.noweaj.android.hybridcleanerandroid.ui.component.BaseDialog
+import com.noweaj.android.hybridcleanerandroid.ui.component.BasicDialog
 
 abstract class BaseActivity: AppCompatActivity() {
 
@@ -68,8 +69,9 @@ abstract class BaseActivity: AppCompatActivity() {
 
     private fun showAlertDialog(cause: String, msg: String){
         // show alert dialog
-        dialog = BaseDialog(
+        dialog = BasicDialog(
             context = this,
+            View.inflate(this, R.layout.dialog_base, null),
             getString(R.string.text_dialog_err_title),
             onButton1Callback = object : BaseDialog.BaseDialogCallback{
                 override fun onDialogFinished() {
