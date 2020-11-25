@@ -14,16 +14,25 @@
     <string name="text_main_snackbar_bluetoothnotavailable">해당 기기는 블루투스 연결이 불가능 합니다.</string>
     <string name="text_main_error_message">오류가 발생하였습니다. 전원을 끄고 재기동 하거나 지속적으로 해당 문제가 발생하는 경우 고객센터에 문의해 주시기 바랍니다.</string>
     <string name="text_main_snackbar_error_ignore">\'무시하기\'를 선택하였습니다. 문제있는 경우 꼭 AS센터로 문의해 주세요.</string>
+    
+    // drawer
+    <string name="title_drawer_announcement">공지사항</string>
+    <string name="title_drawer_appversion">버전 정보</string>
+    <string name="title_drawer_usermanual">사용자 메뉴얼</string>
+    <string name="title_drawer_website">홈페이지</string>
+    <string name="title_drawer_productinfo">제품 정보</string>
+    <string name="title_drawer_personalinfo">개인정보 취급방침</string>
+    <string name="title_drawer_useragreement">이용약관</string>
 
-    // erro message
+    // error message
     <string name="text_errorcode_battvolt">배터리 과전압 위헙</string>
     <string name="text_errorcode_batttemp">배터리 과열 위험</string>
     <string name="text_errorcode_chgcurr">배터리 과전류 위험</string>
     <string name="text_errorcode_motcurr">모터 과전류 위험</string>
 
     // ble dialog
-    <string name="text_dialog_ble_title">센스봇 연결</string>
-    <string name="text_dialog_ble_info">센스봇과 연결 없이 앱을 사용할 수 있으나\n일부 기능이 제한됩니다.</string>
+    <string name="text_dialog_ble_title">블루투스 연결</string>
+    <string name="text_dialog_ble_info">블루투스 연결 없이 앱을 사용할 수 있으나\n일부 기능이 제한됩니다.</string>
     <string name="button_dialog_ble_skip">연결하지 않고 사용</string>
 
     // err dialog
@@ -38,9 +47,9 @@
 
     // diagnosis
     <string name="button_diagnosis_ambient">조도 센서 진단</string>
-    <string name="text_diagnosis_ambient_info">센스봇 윗면에 있는 조도센서를 손으로 가린 후\n떼는 동작을 해보세요.\n아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>
+    <string name="text_diagnosis_ambient_info">센스봇 윗면에 있는 조도센서를 손으로 가린 후 떼는 동작을 해보세요. 아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>
     <string name="button_diagnosis_cliff">절벽감지 센서 진단</string>
-    <string name="text_diagnosis_cliff_info">센스봇 바닥에 있는 4개의 센서를 손으로 가린 후\n떼는 동작을 해보세요.\n아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>
+    <string name="text_diagnosis_cliff_info">센스봇 바닥에 있는 4개의 센서를 손으로 가린 후 떼는 동작을 해보세요. 아래 그림에서 동작 여부를 확인 할 수 있습니다.</string>
 
     // battery
     <string name="text_battery_connected">Connected</string>
@@ -51,7 +60,7 @@
     <string name="text_battery_warning">⊙ 경고\n제품 충전은 반드시 제품의 전원을 끈 상태에서 해주세요.</string>
 
     // cs
-    <string name="title_tab_cs_qna">자주하는 질문</string>
+    <string name="title_tab_cs_qna">FAQ</string>
     <string name="title_tab_cs_inquiry">문의하기</string>
     <string name="title_tab_cs_response">문의내역확인</string>
     <string name="title_tab_cs_cscenter">고객센터</string>
@@ -64,5 +73,8 @@
     <string name="text_cs_center_title_workinghours">운영시간</string>
     <string name="text_cs_center_content_address">| 서울시 서울구 서울로 1호(서울동, 서울빌딩)</string>
     <string name="text_cs_center_content_workinghours">| 월요일~금요일 AM10:00~PM18:00\n (점심시간 PM12:00~PM13:00, 주말,공휴일 휴무)</string>
+
+    // other
+    <string name="text_other_sample_url">http://google.com</string>
 
 </resources>

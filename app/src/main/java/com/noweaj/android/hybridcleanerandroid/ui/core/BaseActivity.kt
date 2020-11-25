@@ -1,6 +1,6 @@
 package com.noweaj.android.hybridcleanerandroid.ui.core
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
@@ -55,8 +55,8 @@ abstract class BaseActivity: AppCompatActivity() {
 
         // check permission
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if(checkSelfPermission(ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-                requestPermissions(arrayOf(ACCESS_COARSE_LOCATION), REQUEST_CODE_PERMISSION)
+            if(checkSelfPermission(ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                requestPermissions(arrayOf(ACCESS_FINE_LOCATION), REQUEST_CODE_PERMISSION)
                 return
             }
         }

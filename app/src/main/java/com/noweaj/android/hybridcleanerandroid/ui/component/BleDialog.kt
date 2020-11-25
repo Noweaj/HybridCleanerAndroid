@@ -3,6 +3,9 @@ package com.noweaj.android.hybridcleanerandroid.ui.component
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
+import android.bluetooth.le.BluetoothLeScanner
+import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.os.Handler
 import android.util.Log
@@ -40,6 +43,7 @@ class BleDialog(val context: Context, private val dialogCallback: BleDialogCallb
 
     lateinit var mListViewAdapter: ListViewAdapter
     lateinit var mBluetoothAdapter: BluetoothAdapter
+    lateinit var mBluetoothLeScanner: BluetoothLeScanner
     lateinit var mHandler: Handler
     var mScanning = false
 
@@ -50,6 +54,8 @@ class BleDialog(val context: Context, private val dialogCallback: BleDialogCallb
 
         val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         mBluetoothAdapter = bluetoothManager.adapter
+
+        mBluetoothLeScanner = mBluetoothAdapter.bluetoothLeScanner
 
         view.ll_dialog_ble_button.setOnClickListener{
             finish(null, null)
@@ -75,7 +81,8 @@ class BleDialog(val context: Context, private val dialogCallback: BleDialogCallb
     }
 
     val onItemClickListener = AdapterView.OnItemClickListener{ parent, view, pos, id ->
-        mBluetoothAdapter.stopLeScan(leScanCallback)
+//        mBluetoothAdapter.stopLeScan(leScanCallback)
+        mBluetoothLeScanner.stopScan(bleScannerCallback)
         val selectedDevice = parent.getItemAtPosition(pos) as BluetoothDevice
         var unknownDevice = selectedDevice.name
         unknownDevice = unknownDevice ?: "Unknown Device"
@@ -83,23 +90,43 @@ class BleDialog(val context: Context, private val dialogCallback: BleDialogCallb
     }
 
     private val leScanCallback = BluetoothAdapter.LeScanCallback{ device, rssi, scanRecord ->
+        Log.d(TAG, "${device.name} ${device.address}")
         mListViewAdapter.addDevice(device)
         mListViewAdapter.notifyDataSetChanged()
     }
 
+    private val bleScannerCallback = object: ScanCallback(){
+        override fun onScanResult(callbackType: Int, result: ScanResult?) {
+            super.onScanResult(callbackType, result)
+            mListViewAdapter.addDevice(result!!.device)
+            mListViewAdapter.notifyDataSetChanged()
+        }
+
+        override fun onScanFailed(errorCode: Int) {
+            super.onScanFailed(errorCode)
+        }
+
+        override fun onBatchScanResults(results: MutableList<ScanResult>?) {
+            super.onBatchScanResults(results)
+        }
+    }
+
     private fun scanLeDevice(enable: Boolean){
+        Log.d(TAG, "scanLeDevice: $enable")
         if(enable){
             mHandler.postDelayed({
                 scanLeDevice(false)
             }, 5000)
 
             mScanning = enable
-            mBluetoothAdapter.startLeScan(leScanCallback)
+//            mBluetoothAdapter.startLeScan(leScanCallback)
+            mBluetoothLeScanner.startScan(bleScannerCallback)
             view.pb_dialog_ble_scanning.visibility = View.VISIBLE
             view.iv_dialog_ble_rescan.visibility = View.INVISIBLE
         } else {
             mScanning = enable
-            mBluetoothAdapter.stopLeScan(leScanCallback)
+//            mBluetoothAdapter.stopLeScan(leScanCallback)
+            mBluetoothLeScanner.stopScan(bleScannerCallback)
             view.pb_dialog_ble_scanning.visibility = View.INVISIBLE
             view.iv_dialog_ble_rescan.visibility = View.VISIBLE
         }

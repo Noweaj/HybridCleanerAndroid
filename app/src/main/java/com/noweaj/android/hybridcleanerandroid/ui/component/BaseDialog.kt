@@ -35,12 +35,7 @@ class BaseDialog(
         dialog = builder.create()
 
         view.tv_dialog_base_title.text = title
-
-        if(cause.isNotBlank())
-            view.tv_dialog_base_cause.text = "원인: $cause"
-        else
-            view.tv_dialog_base_cause.text = ""
-
+        view.tv_dialog_base_cause.text = "$cause"
         view.tv_dialog_base_info.text = msg
 
         view.ll_dialog_base_button1.setOnClickListener{

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -9,97 +9,120 @@
             type="com.noweaj.android.hybridcleanerandroid.viewmodel.MainViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/dl_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:openDrawer="end">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/abl_main"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_main_notification_nobluetooth"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/abl_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textSize="10sp"
-                android:text="블루투스 연결 없음"
-                android:gravity="center"
-                android:textColor="#FFFFFF"
-                android:background="#FF6666"
-                android:visibility="gone"/>
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/tb_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="80dp"
-                android:padding="20dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <TextView
+                    android:id="@+id/tv_main_notification_nobluetooth"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textSize="10sp"
+                    android:text="블루투스 연결 없음"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:background="#FF6666"
+                    android:visibility="gone"/>
 
-                    <ImageView
-                        android:id="@+id/iv_main_ble"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:src="@drawable/image_main_ble_off"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintHeight_percent=".6"
-                        app:layout_constraintWidth_percent=".1"
-                        android:onClick="@{()->mainViewModel.onBleClicked()}"/>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/tb_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="80dp"
+                    android:padding="20dp">
 
-                    <ImageView
-                        android:id="@+id/iv_main_fine"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/image_main_logo"
-                        app:layout_constraintWidth_percent=".60"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:onClick="@{()->mainViewModel.onLogoClicked()}"/>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/iv_main_drawer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_menu_36_000000"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        android:onClick="@{()->mainViewModel.onDrawerClicked()}"/>
+                        <ImageView
+                            android:id="@+id/iv_main_ble"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:src="@drawable/image_main_ble_off"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintHeight_percent=".6"
+                            app:layout_constraintWidth_percent=".1"
+                            android:onClick="@{()->mainViewModel.onBleClicked()}"/>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:id="@+id/iv_main_fine"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/image_main_logo"
+                            app:layout_constraintWidth_percent=".60"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:onClick="@{()->mainViewModel.onLogoClicked()}"/>
 
-            </androidx.appcompat.widget.Toolbar>
+                        <ImageView
+                            android:id="@+id/iv_main_drawer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_menu_36_000000"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:onClick="@{()->mainViewModel.onDrawerClicked()}"/>
 
-        </com.google.android.material.appbar.AppBarLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/abl_main"
-            app:layout_constraintBottom_toBottomOf="parent">
+                </androidx.appcompat.widget.Toolbar>
 
-            <fragment
-                android:id="@+id/nav_main"
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/nav_main"/>
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/abl_main"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-        </FrameLayout>
+                <fragment
+                    android:id="@+id/nav_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/nav_main"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nv_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:background="#00000000">
+
+            <include
+                android:id="@+id/i_nv"
+                layout="@layout/layout_navigation_drawer"
+                app:onClick="@{(v)->mainViewModel.onDrawerItemClicked(v)}"/>
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

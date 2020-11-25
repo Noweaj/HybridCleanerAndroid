@@ -43,10 +43,9 @@
         <LinearLayout
             android:id="@+id/ll_diagnosis_cliff_info"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             app:layout_constraintTop_toBottomOf="@id/ll_diagnosis_cliff_buttons"
             android:layout_margin="20dp"
-            app:layout_constraintHeight_percent=".125"
             android:background="#FFFFFF">
 
             <ImageView
@@ -62,9 +61,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:layout_marginRight="10dp"
+                android:padding="5dp"
                 android:gravity="center_vertical"
                 android:text="@string/text_diagnosis_cliff_info"
-                android:textSize="11sp"/>
+                android:textSize="10sp"/>
 
         </LinearLayout>
 
@@ -76,6 +76,7 @@
             android:layout_margin="30dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_diagnosis_cliff_body_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -87,38 +88,55 @@
                     android:id="@+id/iv_diagnosis_cliff_body"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/image_diagnosis_cliff_body"/>
 
                 <ImageView
                     android:id="@+id/iv_diagnosis_cliff_sensor_topleft"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintHorizontal_bias=".073"
+                    app:layout_constraintVertical_bias=".109"
                     android:src="@drawable/image_diagnosis_sensor_off"/>
 
                 <ImageView
                     android:id="@+id/iv_diagnosis_cliff_sensor_topright"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHorizontal_bias=".935"
+                    app:layout_constraintVertical_bias=".109"
                     android:src="@drawable/image_diagnosis_sensor_off"/>
 
                 <ImageView
                     android:id="@+id/iv_diagnosis_cliff_sensor_bottomleft"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintHorizontal_bias=".10"
+                    app:layout_constraintVertical_bias=".890"
                     android:src="@drawable/image_diagnosis_sensor_off"/>
 
                 <ImageView
                     android:id="@+id/iv_diagnosis_cliff_sensor_bottomright"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintHorizontal_bias=".905"
+                    app:layout_constraintVertical_bias=".890"
                     android:src="@drawable/image_diagnosis_sensor_off"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

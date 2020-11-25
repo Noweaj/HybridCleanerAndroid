@@ -49,7 +49,7 @@ class DiagnosisCliffFragment: BaseBleFragment() {
         observerCliff = Observer {
             Log.d(TAG, "topleft: ${it[0]} topright: ${it[1]} botleft: ${it[2]} botright: ${it[3]}")
             setVisibilityOnConnected()
-            setPosition()
+//            setPosition()
             setValue(it)
         }
         binding.viewModel!!.cliffSensorData.observe(viewLifecycleOwner, observerCliff)
@@ -76,25 +76,28 @@ class DiagnosisCliffFragment: BaseBleFragment() {
     }
 
     private fun setPosition(){
+        Log.d(TAG, "body layout size: w=${binding.clDiagnosisCliffBodyLayout.width} h=${binding.clDiagnosisCliffBodyLayout.height}")
+        Log.d(TAG, "body size: w=${binding.ivDiagnosisCliffBody.width} h=${binding.ivDiagnosisCliffBody.height}")
+
         binding.ivDiagnosisCliffSensorTopleft.x =
-            (binding.ivDiagnosisCliffBody.x + (binding.ivDiagnosisCliffBody.width * 0.073)).toFloat()
+            (/*binding.ivDiagnosisCliffBody.x + */(binding.ivDiagnosisCliffBody.width.toFloat() * 0.073)).toFloat()
         binding.ivDiagnosisCliffSensorTopleft.y =
-            (binding.ivDiagnosisCliffBody.y + (binding.ivDiagnosisCliffBody.height * 0.109)).toFloat()
+            (/*binding.ivDiagnosisCliffBody.y + */(binding.ivDiagnosisCliffBody.height.toFloat() * 0.109)).toFloat()
 
         binding.ivDiagnosisCliffSensorTopright.x =
-            (binding.ivDiagnosisCliffBody.x + (binding.ivDiagnosisCliffBody.width * 0.885)).toFloat()
+            (/*binding.ivDiagnosisCliffBody.x + */(binding.ivDiagnosisCliffBody.width.toFloat() * 0.885)).toFloat()
         binding.ivDiagnosisCliffSensorTopright.y =
-            (binding.ivDiagnosisCliffBody.y + (binding.ivDiagnosisCliffBody.height * 0.109)).toFloat()
+            (/*binding.ivDiagnosisCliffBody.y + */(binding.ivDiagnosisCliffBody.height.toFloat() * 0.109)).toFloat()
 
         binding.ivDiagnosisCliffSensorBottomleft.x =
-            (binding.ivDiagnosisCliffBody.x + (binding.ivDiagnosisCliffBody.width * 0.099)).toFloat()
+            (/*binding.ivDiagnosisCliffBody.x + */(binding.ivDiagnosisCliffBody.width.toFloat() * 0.099)).toFloat()
         binding.ivDiagnosisCliffSensorBottomleft.y =
-            (binding.ivDiagnosisCliffBody.y + (binding.ivDiagnosisCliffBody.height * 0.837)).toFloat()
+            (/*binding.ivDiagnosisCliffBody.y + */(binding.ivDiagnosisCliffBody.height.toFloat() * 0.837)).toFloat()
 
         binding.ivDiagnosisCliffSensorBottomright.x =
-            (binding.ivDiagnosisCliffBody.x + (binding.ivDiagnosisCliffBody.width * 0.856)).toFloat()
+            (/*binding.ivDiagnosisCliffBody.x + */(binding.ivDiagnosisCliffBody.width.toFloat() * 0.856)).toFloat()
         binding.ivDiagnosisCliffSensorBottomright.y =
-            (binding.ivDiagnosisCliffBody.y + (binding.ivDiagnosisCliffBody.height * 0.837)).toFloat()
+            (/*binding.ivDiagnosisCliffBody.y + */(binding.ivDiagnosisCliffBody.height.toFloat() * 0.837)).toFloat()
     }
 
     private fun setValue(data: Array<Boolean>){

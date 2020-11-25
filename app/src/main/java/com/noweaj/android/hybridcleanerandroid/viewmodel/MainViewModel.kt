@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +20,7 @@ import org.json.JSONObject
 class MainViewModel(application: Application): AndroidViewModel(application) {
 
     private val TAG = MainViewModel::class.java.simpleName
+    private val appContext = getApplication<Application>()
 
     inline fun <A, B, R> ifNotNull(a: A?, b: B?, code: () -> R){
         if(a != null && b != null) code()
@@ -27,6 +29,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val _navigateToURL = MutableLiveData<SingleEvent<String>>()
     val navigateToURL: LiveData<SingleEvent<String>>
         get() = _navigateToURL
+
+    private val _openDrawer = MutableLiveData<Boolean>()
+    val openDrawer: LiveData<Boolean>
+        get() = _openDrawer
 
     private val _snackbar = MutableLiveData<SingleEvent<String>>()
     val snackbar: LiveData<SingleEvent<String>>
@@ -44,11 +50,12 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     val bleDisconnected: LiveData<SingleEvent<Boolean>>
         get() = _bleDisconnected
 
-    private val sharedPreferences = getApplication<Application>().getSharedPreferences(
-        getApplication<Application>().getString(R.string.preference_ble),
+    private val sharedPreferences = appContext.getSharedPreferences(
+        appContext.getString(R.string.preference_ble),
         Context.MODE_PRIVATE
     )
     private val editor = sharedPreferences.edit()
+
 
     init{
 //        val autoConnectDeviceAddress = sharedPreferences.getString("DEVICE_ADDRESS", null)
@@ -57,6 +64,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 //            setConnection("FineHybrid", autoConnectDeviceAddress)
 //        else
             setBleStatus(0)
+
+//        _openDrawer.value = false
     }
 
     private fun setBleStatus(value: Int){ _bleStatus.value = value }
@@ -71,7 +80,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                 return
             } else {
                 _snackbar.value = SingleEvent(
-                    getApplication<Application>().getString(R.string.text_main_snackbar_invaliddevice)
+                    appContext.getString(R.string.text_main_snackbar_invaliddevice)
                 )
             }
         }
@@ -117,9 +126,41 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     fun onDrawerClicked(){
         Log.d(TAG, "onDrawerClicked")
+        _openDrawer.value = true
     }
 
     fun onLogoClicked(){
-        _navigateToURL.value = SingleEvent("http://google.com")
+        _navigateToURL.value = SingleEvent(appContext.getString(R.string.text_other_sample_url))
+    }
+
+    fun onDrawerItemClicked(v: View){
+        Log.d(TAG, "onDrawerItemClicked: ${v.id}")
+        when(v.id){
+            R.id.tv_drawer_announcement -> {
+                // new dialog for showing announcements from firebase
+            }
+            R.id.tv_drawer_appversion -> {
+                // new dialog for showing app version
+            }
+            R.id.tv_drawer_usermanual -> {
+                // redirect to open sensebot_manual_kr_ver1.pdf
+            }
+            R.id.tv_drawer_website -> {
+                _navigateToURL.value = SingleEvent(appContext.getString(R.string.text_other_sample_url))
+            }
+            R.id.tv_drawer_productinfo -> {
+                _navigateToURL.value = SingleEvent(appContext.getString(R.string.text_other_sample_url))
+            }
+            R.id.tv_drawer_personalinfo -> {
+                // open DocDialog with txt_agree2_utf.txt
+            }
+            R.id.tv_drawer_useragreement -> {
+                // open DocDialog with txt_agree1_utf.txt
+            }
+            else -> {
+                // err
+                _openDrawer.value = false
+            }
+        }
     }
 }

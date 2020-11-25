@@ -1,14 +1,17 @@
 package com.noweaj.android.hybridcleanerandroid.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.ble.BleDataReceiver
@@ -31,6 +34,7 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var observerNavigateToURL: Observer<SingleEvent<String>>
+    private lateinit var observerOpenDrawer: Observer<Boolean>
     private lateinit var observerSnackBar: Observer<SingleEvent<String>>
     private lateinit var observerBleStatus: Observer<Int>
     private lateinit var observerErrorMessage: Observer<String>
@@ -60,6 +64,9 @@ class MainActivity : BaseActivity() {
         binding.mainViewModel = viewModel
 
         binding.tvMainNotificationNobluetooth.visibility = View.VISIBLE
+
+        binding.nvMain.bringToFront()
+        binding.dlMain.drawerElevation = 0f
     }
 
 
@@ -70,6 +77,14 @@ class MainActivity : BaseActivity() {
             }
         }
         viewModel.navigateToURL.observe(this, observerNavigateToURL)
+
+        observerOpenDrawer = Observer{
+            if(it)
+                binding.dlMain.openDrawer(Gravity.RIGHT)
+            else
+                binding.dlMain.closeDrawer(Gravity.RIGHT)
+        }
+        viewModel.openDrawer.observe(this, observerOpenDrawer)
 
         observerSnackBar = Observer { event ->
             event.getContentIfNotHandled()?.let{
@@ -121,6 +136,7 @@ class MainActivity : BaseActivity() {
                 },
                 onExitCallback = object: BaseDialog.BaseDialogCallback{
                     override fun onDialogFinished() {
+                        disconnect()
                         finish()
                     }
                 },
@@ -208,6 +224,7 @@ class MainActivity : BaseActivity() {
 
         viewModel.bleStatus.removeObserver(observerBleStatus)
         viewModel.navigateToURL.removeObserver(observerNavigateToURL)
+        viewModel.openDrawer.removeObserver(observerOpenDrawer)
         viewModel.snackbar.removeObserver(observerSnackBar)
         viewModel.errorMessage.removeObserver(observerErrorMessage)
         viewModel.bleDisconnected.removeObserver(observerBleDisconnected)
@@ -229,11 +246,12 @@ class MainActivity : BaseActivity() {
             },
             onExitCallback = object: BaseDialog.BaseDialogCallback{
                 override fun onDialogFinished() {
+                    disconnect()
                     finish()
                 }
             },
-            "",
-            "앱을 종료합니다",
+            "앱을 종료합니다. 저장되지 않은 정보는 모두 사라집니다.",
+            "계속 하시겠습니까?",
             "취소"
         ).build()
         exitDialog!!.show()

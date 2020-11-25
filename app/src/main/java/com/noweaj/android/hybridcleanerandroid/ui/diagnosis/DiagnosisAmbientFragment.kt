@@ -51,7 +51,7 @@ class DiagnosisAmbientFragment: BaseBleFragment() {
         observerAmbient = Observer {
             Log.d(TAG, "it: $it")
             binding.ivDiagnosisAmbientSensor.visibility = View.VISIBLE
-            setPosition()
+//            setPosition()
             if(it){
                 binding.ivDiagnosisAmbientSensor.setImageResource(R.drawable.image_diagnosis_sensor_on)
             } else {
@@ -68,8 +68,16 @@ class DiagnosisAmbientFragment: BaseBleFragment() {
     }
 
     private fun setPosition(){
-        val lightX = binding.ivDiagnosisAmbientBody.x + (binding.ivDiagnosisAmbientBody.width * 0.15)
-        val lightY = binding.ivDiagnosisAmbientBody.y + (binding.ivDiagnosisAmbientBody.height * 0.16)
+        Log.d(TAG, "body layout size: w=${binding.clDiagnosisAmbientBodyLayout.width} h=${binding.clDiagnosisAmbientBodyLayout.height}")
+        Log.d(TAG, "body size: w=${binding.ivDiagnosisAmbientBody.width} h=${binding.ivDiagnosisAmbientBody.height}")
+
+        Log.d(TAG, "bodylayoutx: ${binding.clDiagnosisAmbientBodyLayout.x} bodylayouty: ${binding.clDiagnosisAmbientBodyLayout.y}")
+        Log.d(TAG, "bodyx: ${binding.ivDiagnosisAmbientBody.x} bodyy: ${binding.ivDiagnosisAmbientBody.y}")
+
+        val lightX = /*binding.ivDiagnosisAmbientBody.x + */(binding.ivDiagnosisAmbientBody.width.toFloat() * 0.14925)
+        val lightY = /*binding.ivDiagnosisAmbientBody.y + */(binding.ivDiagnosisAmbientBody.height.toFloat() * 0.17210)
+
+        Log.d(TAG, "sensorX: $lightX, sensorY: $lightY")
 
         binding.ivDiagnosisAmbientSensor.x = lightX.toFloat()
         binding.ivDiagnosisAmbientSensor.y = lightY.toFloat()
@@ -97,4 +105,10 @@ width x height
 57 x 57
 
 0.14179 x 0.16914
+
+
+60 x 58
+
+ 0.14925 x 0.17210
+
         **/
