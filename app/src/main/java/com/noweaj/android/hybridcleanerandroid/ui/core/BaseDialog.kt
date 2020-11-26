@@ -19,6 +19,12 @@ abstract class BaseDialog(
 
     var dialog: AlertDialog? = null
 
+    fun build(){
+        dialog = builder.create()
+        dialog?.setCanceledOnTouchOutside(false)
+        dialog?.setCancelable(false)
+    }
+
     fun show(){
         dialog?: return
         dialog?.setCanceledOnTouchOutside(false)

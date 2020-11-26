@@ -2,9 +2,6 @@ package com.noweaj.android.hybridcleanerandroid.viewmodel
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.net.Uri
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
@@ -12,10 +9,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.data.SingleEvent
+import com.noweaj.android.hybridcleanerandroid.data.TitleContentData
 import com.noweaj.android.hybridcleanerandroid.test.BleDataPublishTest
 import com.noweaj.android.hybridcleanerandroid.util.ErrorCheckUtil
 import com.noweaj.android.hybridcleanerandroid.util.NullCheckUtil
 import org.json.JSONObject
+import java.nio.charset.Charset
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
 
@@ -42,9 +41,13 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     val bleStatus: LiveData<Int>
         get() = _bleStatus
 
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String>
-        get() = _errorMessage
+    private val _showErrorDialog = MutableLiveData<String>()
+    val showErrorDialog: LiveData<String>
+        get() = _showErrorDialog
+
+    private val _showDocDialog = MutableLiveData<TitleContentData>()
+    val showDocDialog: LiveData<TitleContentData>
+        get() = _showDocDialog
 
     private val _bleDisconnected = MutableLiveData<SingleEvent<Boolean>>()
     val bleDisconnected: LiveData<SingleEvent<Boolean>>
@@ -116,7 +119,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             }
             Log.d(TAG, "getErrorMessage: ${stringBuilder.toString()}")
             if(stringBuilder.toString().trim().isNotEmpty())
-                _errorMessage.postValue(stringBuilder.toString())
+                _showErrorDialog.postValue(stringBuilder.toString())
         }
     }
 
@@ -136,6 +139,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun onDrawerItemClicked(v: View){
         Log.d(TAG, "onDrawerItemClicked: ${v.id}")
         when(v.id){
+            R.id.tv_drawer_login -> {
+                // login
+            }
             R.id.tv_drawer_announcement -> {
                 // new dialog for showing announcements from firebase
             }
@@ -152,15 +158,27 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                 _navigateToURL.value = SingleEvent(appContext.getString(R.string.text_other_sample_url))
             }
             R.id.tv_drawer_personalinfo -> {
-                // open DocDialog with txt_agree2_utf.txt
+                Log.d(TAG, "personalinfo")
+                val content = getContentFromFile("txt_agree2_utf.txt")
+                _showDocDialog.value = TitleContentData("개인정보 취급방침", content)
             }
             R.id.tv_drawer_useragreement -> {
-                // open DocDialog with txt_agree1_utf.txt
+                Log.d(TAG, "useragreement")
+                val content = getContentFromFile("txt_agree1_utf.txt")
+                _showDocDialog.value = TitleContentData("이용약관", content)
             }
             else -> {
                 // err
                 _openDrawer.value = false
             }
         }
+    }
+
+    private fun getContentFromFile(filename: String): String{
+        val inputStream = getApplication<Application>().assets.open(filename)
+        val buffer = ByteArray(inputStream.available())
+        inputStream.read(buffer)
+        inputStream.close()
+        return String(buffer, Charset.forName("UTF-8"))
     }
 }

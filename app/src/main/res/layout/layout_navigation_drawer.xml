@@ -37,10 +37,30 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/ll_drawer_category1"
+                    android:id="@+id/ll_drawer_category0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_drawer_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/title_drawer_login"
+                        android:textSize="15sp"
+                        android:onClick="@{onClick}"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_drawer_category1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/ll_drawer_category0"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 

@@ -14,9 +14,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.ble.BleDataReceiver
 import com.noweaj.android.hybridcleanerandroid.data.SingleEvent
+import com.noweaj.android.hybridcleanerandroid.data.TitleContentData
 import com.noweaj.android.hybridcleanerandroid.databinding.ActivityMainBinding
 import com.noweaj.android.hybridcleanerandroid.ui.component.BleDialog
 import com.noweaj.android.hybridcleanerandroid.ui.component.BasicDialog
+import com.noweaj.android.hybridcleanerandroid.ui.component.DocDialog
 import com.noweaj.android.hybridcleanerandroid.ui.core.BaseActivity
 import com.noweaj.android.hybridcleanerandroid.ui.core.BaseDialog
 import com.noweaj.android.hybridcleanerandroid.util.InjectionUtil
@@ -36,14 +38,16 @@ class MainActivity : BaseActivity() {
     private lateinit var observerOpenDrawer: Observer<Boolean>
     private lateinit var observerSnackBar: Observer<SingleEvent<String>>
     private lateinit var observerBleStatus: Observer<Int>
-    private lateinit var observerErrorMessage: Observer<String>
+    private lateinit var observerShowErrorDialog: Observer<String>
+    private lateinit var observerShowDocDialog: Observer<TitleContentData>
     private lateinit var observerBleDisconnected: Observer<SingleEvent<Boolean>>
 
     private var isBluetoothAvailable = false
 
     private var bleDialog: AlertDialog? = null
-    private var errorDialog: AlertDialog? = null
-    private var exitDialog: AlertDialog? = null
+    private var errorDialog: BasicDialog? = null
+    private var docDialog: DocDialog? = null
+    private var exitDialog: BasicDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,25 +116,28 @@ class MainActivity : BaseActivity() {
         }
         viewModel.bleStatus.observe(this, observerBleStatus)
 
-        observerErrorMessage = Observer {
+        observerShowErrorDialog = Observer {
             Log.d(TAG, "$it")
             errorDialog?.let { return@Observer }
             errorDialog = BasicDialog(
                 context = this,
-                View.inflate(this, R.layout.dialog_base, null),
-                getString(R.string.text_dialog_err_title),
+                view = View.inflate(this, R.layout.dialog_basic, null)
+            )
+            errorDialog!!.build(
+                title = getString(R.string.text_dialog_err_title),
+                cause = it,
+                msg = getString(R.string.text_main_error_message),
                 onButton1Callback = object: BaseDialog.BaseDialogCallback{
                     override fun onDialogFinished() {
-                        // button: 무시
                         showSnackbar(getString(R.string.text_main_snackbar_error_ignore))
                         errorDialog = null
+                        // do nothing
                     }
                 },
                 onButton2Callback = object: BaseDialog.BaseDialogCallback{
                     override fun onDialogFinished() {
-                        // button: AS문의하기
-                        Log.d(TAG, "Move to inquiry")
                         showSnackbar("\'고객센터->문의하기\'로 이동하여 AS문의를 진행해 주세요.")
+                        errorDialog = null
                         disconnect()
                     }
                 },
@@ -140,14 +147,31 @@ class MainActivity : BaseActivity() {
                         finish()
                     }
                 },
-                it,
-                getString(R.string.text_main_error_message),
                 "무시",
                 "AS문의"
-            ).build()
+            )
             errorDialog!!.show()
         }
-        viewModel.errorMessage.observe(this, observerErrorMessage)
+        viewModel.showErrorDialog.observe(this, observerShowErrorDialog)
+
+        observerShowDocDialog = Observer {
+            docDialog?.let{ return@Observer}
+            docDialog = DocDialog(
+                context = this,
+                view = View.inflate(this, R.layout.dialog_doc, null)
+            )
+            docDialog!!.build(
+                title = it.title,
+                content = it.content,
+                onExitCallback = object: BaseDialog.BaseDialogCallback{
+                    override fun onDialogFinished() {
+                        docDialog = null
+                    }
+                }
+            )
+            docDialog!!.show()
+        }
+        viewModel.showDocDialog.observe(this, observerShowDocDialog)
 
         observerBleDisconnected = Observer { event ->
             event.getContentIfNotHandled()?.let{
@@ -203,6 +227,7 @@ class MainActivity : BaseActivity() {
         super.onPause()
         bleDialog?.let{ bleDialog!!.dismiss() }
         errorDialog?.let{ errorDialog!!.dismiss() }
+        exitDialog?.let{ exitDialog!!.dismiss() }
         unsubscribe()
 
 //        val bleDataPublishTest = BleDataPublishTest.getInstance()
@@ -226,18 +251,23 @@ class MainActivity : BaseActivity() {
         viewModel.navigateToURL.removeObserver(observerNavigateToURL)
         viewModel.openDrawer.removeObserver(observerOpenDrawer)
         viewModel.snackbar.removeObserver(observerSnackBar)
-        viewModel.errorMessage.removeObserver(observerErrorMessage)
+        viewModel.showErrorDialog.removeObserver(observerShowErrorDialog)
+        viewModel.showDocDialog.removeObserver(observerShowDocDialog)
         viewModel.bleDisconnected.removeObserver(observerBleDisconnected)
     }
 
     override fun onBackPressed() {
         exitDialog = BasicDialog(
             context = this,
-            View.inflate(this, R.layout.dialog_base, null),
-            "종료",
+            View.inflate(this, R.layout.dialog_basic, null)
+        )
+        exitDialog!!.build(
+            title = "종료",
+            cause = "앱을 종료합니다. 저장되지 않은 정보는 모두 사라집니다.",
+            msg = "계속 하시겠습니까?",
             onButton1Callback = object: BaseDialog.BaseDialogCallback{
                 override fun onDialogFinished() {
-                    exitDialog!!.dismiss()
+                    //
                 }
             },
             onButton2Callback = object: BaseDialog.BaseDialogCallback{
@@ -251,10 +281,8 @@ class MainActivity : BaseActivity() {
                     finish()
                 }
             },
-            "앱을 종료합니다. 저장되지 않은 정보는 모두 사라집니다.",
-            "계속 하시겠습니까?",
             "취소"
-        ).build()
+        )
         exitDialog!!.show()
     }
 }

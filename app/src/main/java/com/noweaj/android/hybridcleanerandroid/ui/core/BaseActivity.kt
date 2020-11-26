@@ -65,32 +65,34 @@ abstract class BaseActivity: AppCompatActivity() {
         onBluetoothCheckDone(true)
     }
 
-    private var dialog: AlertDialog? = null
+    private var dialog: BasicDialog? = null
 
     private fun showAlertDialog(cause: String, msg: String){
         // show alert dialog
         dialog = BasicDialog(
             context = this,
-            View.inflate(this, R.layout.dialog_base, null),
-            getString(R.string.text_dialog_err_title),
-            onButton1Callback = object : BaseDialog.BaseDialogCallback{
+            view = View.inflate(this, R.layout.dialog_basic, null)
+        )
+        dialog!!.build(
+            title = getString(R.string.text_dialog_err_title),
+            cause = cause,
+            msg = msg,
+            onButton1Callback = object: BaseDialog.BaseDialogCallback{
                 override fun onDialogFinished() {
                     onBluetoothCheckDone(false)
                 }
             },
-            onButton2Callback = object : BaseDialog.BaseDialogCallback {
+            onButton2Callback = object: BaseDialog.BaseDialogCallback{
                 override fun onDialogFinished() {
                     checkBluetooth()
                 }
             },
-            onExitCallback = object : BaseDialog.BaseDialogCallback {
+            onExitCallback = object: BaseDialog.BaseDialogCallback{
                 override fun onDialogFinished() {
                     finish()
                 }
-            },
-            cause,
-            msg
-        ).build()
+            }
+        )
         dialog!!.show()
     }
 

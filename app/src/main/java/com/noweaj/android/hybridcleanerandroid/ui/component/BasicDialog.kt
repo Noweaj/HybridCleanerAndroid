@@ -5,24 +5,23 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.ui.core.BaseDialog
-import kotlinx.android.synthetic.main.dialog_base.view.*
+import kotlinx.android.synthetic.main.dialog_basic.view.*
 
 class BasicDialog(
     context: Context,
-    val view: View,
-    private val title: String,
-    private val onButton1Callback: BaseDialogCallback,
-    private val onButton2Callback: BaseDialogCallback,
-    private val onExitCallback: BaseDialogCallback,
-    private val cause: String,
-    private val msg: String,
-    vararg val button: String
+    val view: View
 ): BaseDialog(context, view) {
 
-    fun build(): AlertDialog {
-        dialog = builder.create()
-        dialog?.setCanceledOnTouchOutside(false)
-        dialog?.setCancelable(false)
+    fun build(
+        title: String,
+        cause: String,
+        msg: String,
+        onButton1Callback: BaseDialogCallback,
+        onButton2Callback: BaseDialogCallback,
+        onExitCallback: BaseDialogCallback,
+        vararg buttonTitle: String
+    ) {
+        super.build()
 
         view.tv_dialog_base_title.text = title
         view.tv_dialog_base_cause.text = "$cause"
@@ -43,21 +42,19 @@ class BasicDialog(
             dismiss()
         }
 
-        when(button.size){
+        when(buttonTitle.size){
             0 -> {}
             1 -> {
-                view.tv_dialog_base_button1.setText(button[0])
+                view.tv_dialog_base_button1.setText(buttonTitle[0])
                 view.ll_dialog_base_button2.visibility = View.GONE
             }
             2 -> {
-                view.tv_dialog_base_button1.setText(button[0])
-                view.tv_dialog_base_button2.setText(button[1])
+                view.tv_dialog_base_button1.setText(buttonTitle[0])
+                view.tv_dialog_base_button2.setText(buttonTitle[1])
             }
             else -> {
                 // err. show as default
             }
         }
-
-        return dialog as AlertDialog
     }
 }

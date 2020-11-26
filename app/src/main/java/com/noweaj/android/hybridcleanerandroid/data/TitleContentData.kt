@@ -1,6 +1,6 @@
 package com.noweaj.android.hybridcleanerandroid.data
 
-data class CsQnaData (
+data class TitleContentData (
     val title: String,
     val content: String
 )

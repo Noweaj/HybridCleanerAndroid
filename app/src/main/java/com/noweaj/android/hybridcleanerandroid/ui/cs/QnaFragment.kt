@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.noweaj.android.hybridcleanerandroid.R
 import com.noweaj.android.hybridcleanerandroid.adapter.CsQnaListAdapter
-import com.noweaj.android.hybridcleanerandroid.data.CsQnaData
+import com.noweaj.android.hybridcleanerandroid.data.TitleContentData
 import com.noweaj.android.hybridcleanerandroid.databinding.FragmentCsQnaBinding
 import org.json.JSONObject
 
@@ -33,15 +33,15 @@ class QnaFragment: Fragment() {
         return binding.root
     }
 
-    private fun loadQnaData(): ArrayList<CsQnaData>{
+    private fun loadQnaData(): ArrayList<TitleContentData>{
         val jsonArray = JSONObject(
             requireContext().assets.open("qna.json").bufferedReader().use { it.readText() }
         ).getJSONArray("qna")
 
-        val dataSet = ArrayList<CsQnaData>()
+        val dataSet = ArrayList<TitleContentData>()
         for(i in 0 until jsonArray.length()){
             dataSet.add(
-                CsQnaData(
+                TitleContentData(
                     title = jsonArray.getJSONObject(i).getString("title"),
                     content = jsonArray.getJSONObject(i).getString("content")
                 )

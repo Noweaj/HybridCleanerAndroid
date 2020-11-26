@@ -16,6 +16,7 @@
     <string name="text_main_snackbar_error_ignore">\'무시하기\'를 선택하였습니다. 문제있는 경우 꼭 AS센터로 문의해 주세요.</string>
     
     // drawer
+    <string name="title_drawer_login">로그인</string>
     <string name="title_drawer_announcement">공지사항</string>
     <string name="title_drawer_appversion">버전 정보</string>
     <string name="title_drawer_usermanual">사용자 메뉴얼</string>

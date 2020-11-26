@@ -5,20 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import android.widget.ListAdapter
 import android.widget.TextView
 import com.noweaj.android.hybridcleanerandroid.R
-import com.noweaj.android.hybridcleanerandroid.data.CsQnaData
+import com.noweaj.android.hybridcleanerandroid.data.TitleContentData
 
 class CsQnaListAdapter: BaseExpandableListAdapter {
 
-    val dataSet: ArrayList<CsQnaData>
+    val dataSet: ArrayList<TitleContentData>
     val titleLayout: Int
     val contentLayout: Int
     val context: Context
     val inflator: LayoutInflater
 
-    constructor(dataSet: ArrayList<CsQnaData>, titleLayout: Int, contentLayout: Int, context: Context){
+    constructor(dataSet: ArrayList<TitleContentData>, titleLayout: Int, contentLayout: Int, context: Context){
         this.dataSet = dataSet
         this.titleLayout = titleLayout
         this.contentLayout = contentLayout
