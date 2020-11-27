@@ -15,6 +15,7 @@ import com.noweaj.android.hybridcleanerandroid.data.TitleContentData
 import com.noweaj.android.hybridcleanerandroid.test.BleDataPublishTest
 import com.noweaj.android.hybridcleanerandroid.util.ErrorCheckUtil
 import com.noweaj.android.hybridcleanerandroid.util.NullCheckUtil
+import com.noweaj.android.hybridcleanerandroid.util.StorageUtil
 import org.json.JSONObject
 import java.io.File
 import java.nio.charset.Charset
@@ -151,14 +152,12 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             R.id.tv_drawer_appversion -> {
                 // new dialog for showing app version
             }
-            R.id.tv_drawer_usermanual -> {
-                // open sensebot_manual_kr_ver1.pdf
-                // check pdf is copied from assets
-                // copy pdf if needed
-                // get pdf uri
+            R.id.tv_drawer_usermanual -> { // open sensebot_manual_kr_ver1.pdf
+                // check and get pdf file object
+                val targetFile = StorageUtil.getManualFile(getApplication<Application>(), "sensebot_manual_kr_ver1.pdf")
                 // send intent to intent resolver
                 val intentPdf = Intent(Intent.ACTION_VIEW)
-                    .setDataAndType(Uri.fromFile(File("${getApplication<Application>().assets}/sensebot_manual_kr_ver1.pdf")), "application/pdf")
+                    .setDataAndType(Uri.fromFile(targetFile), "application/pdf")
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 getApplication<Application>().startActivity(intentPdf)
             }
