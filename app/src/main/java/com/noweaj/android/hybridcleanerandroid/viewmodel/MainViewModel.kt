@@ -2,6 +2,8 @@ package com.noweaj.android.hybridcleanerandroid.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
@@ -14,6 +16,7 @@ import com.noweaj.android.hybridcleanerandroid.test.BleDataPublishTest
 import com.noweaj.android.hybridcleanerandroid.util.ErrorCheckUtil
 import com.noweaj.android.hybridcleanerandroid.util.NullCheckUtil
 import org.json.JSONObject
+import java.io.File
 import java.nio.charset.Charset
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
@@ -149,7 +152,15 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                 // new dialog for showing app version
             }
             R.id.tv_drawer_usermanual -> {
-                // redirect to open sensebot_manual_kr_ver1.pdf
+                // open sensebot_manual_kr_ver1.pdf
+                // check pdf is copied from assets
+                // copy pdf if needed
+                // get pdf uri
+                // send intent to intent resolver
+                val intentPdf = Intent(Intent.ACTION_VIEW)
+                    .setDataAndType(Uri.fromFile(File("${getApplication<Application>().assets}/sensebot_manual_kr_ver1.pdf")), "application/pdf")
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                getApplication<Application>().startActivity(intentPdf)
             }
             R.id.tv_drawer_website -> {
                 _navigateToURL.value = SingleEvent(appContext.getString(R.string.text_other_sample_url))
